@@ -22,6 +22,7 @@
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --accent-blue: #38bdf8;
+    --accent-green: #34d399;
     
     /* Active Certificate Theme Colors (Defaults to Royal Navy) */
     --cert-bg-start: #ffffff;
@@ -163,7 +164,7 @@
   .app-header {
     background: var(--panel-bg);
     border-bottom: 1px solid var(--panel-border);
-    padding: 12px 24px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -191,28 +192,29 @@
     box-shadow: 0 4px 12px rgba(197, 155, 39, 0.25);
   }
   .app-title h1 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     margin: 0;
     color: #ffffff;
     letter-spacing: -0.01em;
   }
   .app-title p {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-muted);
     margin: 1px 0 0 0;
   }
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .btn {
     font-family: inherit;
     font-size: 12px;
     font-weight: 600;
-    padding: 8px 16px;
+    padding: 7px 14px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -239,6 +241,22 @@
   .btn-secondary:hover {
     background: #475569;
     color: #fff;
+  }
+  .btn-accent {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-blue);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+  }
+  .btn-accent:hover {
+    background: rgba(56, 189, 248, 0.25);
+  }
+  .btn-success {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+  }
+  .btn-success:hover {
+    background: rgba(52, 211, 153, 0.25);
   }
   .btn-outline {
     background: transparent;
@@ -267,51 +285,51 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     height: 100%;
-    padding: 18px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
   .panel-section {
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid var(--panel-border);
     border-radius: 12px;
-    padding: 14px;
+    padding: 12px;
   }
   .panel-section-title {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--accent-blue);
-    margin: 0 0 12px 0;
+    margin: 0 0 10px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .form-group {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .form-group:last-child { margin-bottom: 0; }
   .form-group label {
     display: block;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-muted);
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .form-control {
     width: 100%;
     background: #0f172a;
     border: 1px solid var(--panel-border);
     border-radius: 6px;
-    padding: 8px 10px;
+    padding: 7px 10px;
     color: #ffffff;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     outline: none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
@@ -347,12 +365,12 @@
 
   .preset-buttons {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     flex-wrap: wrap;
   }
   .btn-chip {
-    font-size: 11px;
-    padding: 5px 10px;
+    font-size: 10.5px;
+    padding: 4px 9px;
     border-radius: 20px;
     background: #0f172a;
     border: 1px solid var(--panel-border);
@@ -366,13 +384,160 @@
     border-color: var(--accent-blue);
   }
 
+  /* File Input Styles */
+  .logo-upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .logo-upload-item {
+    background: #0f172a;
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 6px;
+    text-align: center;
+    position: relative;
+  }
+  .logo-upload-item label {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .file-input-btn {
+    font-size: 9.5px;
+    width: 100%;
+    color: var(--text-muted);
+    background: #1e293b;
+    border: 1px dashed var(--panel-border);
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .logo-preview-badge {
+    font-size: 9px;
+    color: var(--accent-green);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+
+  /* Persistence Status Banner */
+  .storage-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    color: var(--accent-green);
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  .storage-status-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-green);
+  }
+
+  /* Modal Popup for Named Saved Templates */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .modal-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .template-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0f172a;
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+  .template-item:last-child { margin-bottom: 0; }
+
+  /* Toast Notifications */
+  .toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .toast {
+    background: #1e293b;
+    color: #ffffff;
+    border: 1px solid var(--panel-border);
+    border-left: 4px solid var(--accent-blue);
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .toast.success { border-left-color: var(--accent-green); }
+  .toast.warning { border-left-color: #f59e0b; }
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
   /* ---------- Preview Canvas Workspace ---------- */
   .preview-viewport {
     background: #090d16;
     overflow: auto;
     overscroll-behavior: contain;
     height: 100%;
-    padding: 30px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -384,23 +549,23 @@
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
     border-radius: 30px;
-    padding: 6px 18px;
-    margin-bottom: 20px;
+    padding: 6px 16px;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     z-index: 10;
   }
   .preview-toolbar label {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--text-muted);
     font-weight: 600;
   }
   .preview-toolbar input[type="range"] {
     accent-color: var(--gold-primary);
     cursor: pointer;
-    width: 120px;
+    width: 110px;
   }
 
   /* Certificate Container & Scaling Wrapper */
@@ -413,7 +578,7 @@
     position: relative;
     background: linear-gradient(180deg, var(--cert-bg-start) 0%, var(--cert-bg-end) 100%);
     width: 1050px;
-    height: 742px; /* A4 Landscape Standard Proportion */
+    height: 742px; /* Standard A4 Landscape Aspect Ratio */
     padding: 0;
     box-shadow: var(--cert-paper-shadow);
     color: var(--cert-text-dark);
@@ -480,7 +645,7 @@
     display: none;
   }
 
-  /* Traditional Decorative Borders (Fallback / Switchable) */
+  /* Traditional Decorative Borders */
   .frame-outer {
     position: absolute;
     inset: 16px;
@@ -559,14 +724,14 @@
   .certificate-card.border-style-regal .frame-mid { display: block; inset: 18px; border: 4px double var(--cert-primary); }
   .certificate-card.border-style-regal .frame-inner { display: block; inset: 32px; border: 1px solid var(--cert-secondary); }
 
-  /* Inner Certificate Layout */
+  /* Inner Certificate Content Body */
   .cert-body {
     position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 38px 75px 58px 75px;
+    padding: 38px 75px 52px 75px;
     text-align: center;
     z-index: 10;
   }
@@ -576,15 +741,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    min-height: 48px;
-    margin-top: 10px;
-    margin-bottom: 6px;
+    gap: 24px;
+    min-height: 52px;
+    margin-top: 8px;
+    margin-bottom: 4px;
     width: 100%;
   }
   .logo-box {
-    max-width: 170px;
-    height: 48px;
+    max-width: 180px;
+    height: 52px;
     display: none; /* Hidden by default if no image uploaded */
     align-items: center;
     justify-content: center;
@@ -605,7 +770,7 @@
     letter-spacing: 0.22em;
     color: var(--cert-primary);
     text-transform: uppercase;
-    margin-top: 52px; /* Moved down by ~3 lines */
+    margin-top: 48px;
     line-height: 1.3;
     text-shadow: 0 1px 2px rgba(0,0,0,0.05);
     transition: color 0.3s ease;
@@ -734,9 +899,9 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 30px;
     align-items: flex-end;
-    margin-top: 8px;
+    margin-top: 10px;
     padding-top: 2px;
   }
 
@@ -752,180 +917,7 @@
     text-align: center;
   }
   .sig-manual-space {
-    height: 36px; /* Space reserved for physical signature */
-    width: 100%;
-  }
-  .logo-box {
-    max-width: 180px;
-    height: 55px;
-    display: none; /* Hidden by default if no image uploaded */
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    overflow: hidden;
-    position: relative;
-  }
-  .logo-box img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .institution-name {
-    font-family: 'Cinzel', serif;
-    font-weight: 800;
-    font-size: 19px;
-    letter-spacing: 0.24em;
-    color: var(--cert-primary);
-    text-transform: uppercase;
-    margin-top: 52px; /* Moved down by ~3 lines */
-    line-height: 1.3;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    transition: color 0.3s ease;
-  }
-
-  .facilitator-badge-strip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(197, 155, 39, 0.12);
-    border: 1px solid var(--cert-secondary);
-    border-radius: 20px;
-    padding: 4px 18px;
-    margin-top: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: var(--cert-primary);
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
-
-  .cert-main-title {
-    font-family: 'Cinzel', serif;
-    font-size: 34px;
-    font-weight: 800;
-    color: var(--cert-primary);
-    margin: 8px 0 2px 0;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-  }
-  .cert-main-title span {
-    color: var(--cert-secondary);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 600;
-    text-transform: none;
-  }
-
-  .title-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 4px 0 10px 0;
-    width: 240px;
-  }
-  .title-divider .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cert-secondary), transparent);
-  }
-  .title-divider .gem {
-    width: 6px;
-    height: 6px;
-    background: var(--cert-secondary);
-    transform: rotate(45deg);
-  }
-
-  .presentation-text {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--cert-accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-
-  .recipient-container {
-    margin: 2px 0 8px 0;
-    position: relative;
-    display: inline-block;
-    min-width: 65%;
-  }
-  .recipient-name-text {
-    font-family: var(--recipient-font-family, 'Cormorant Garamond'), serif;
-    font-size: var(--recipient-font-size, 44px);
-    font-weight: 700;
-    font-style: var(--recipient-font-style, italic);
-    color: var(--cert-primary);
-    line-height: 1.1;
-    padding-bottom: 4px;
-    transition: color 0.3s ease, font-family 0.2s ease;
-  }
-  .recipient-underline {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--cert-secondary), transparent);
-    width: 100%;
-  }
-
-  .citation-body {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--cert-text-dark);
-    opacity: 0.9;
-    max-width: 780px;
-    margin: 0 auto;
-    font-weight: 500;
-  }
-
-  .workshop-topic-box {
-    margin: 8px 0 4px 0;
-  }
-  .workshop-topic-text {
-    font-family: 'Cinzel', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--cert-primary);
-    letter-spacing: 0.02em;
-    transition: color 0.3s ease;
-  }
-
-  .program-tag {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--cert-secondary);
-    margin-top: 2px;
-  }
-
-  .flex-spacer { flex: 1; }
-
-  /* Footer Section: 3 Signatures Layout */
-  .cert-footer {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    align-items: flex-end;
-    margin-top: 15px;
-    padding-top: 5px;
-  }
-
-  .sig-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sig-wrapper {
-    width: 100%;
-    max-width: 230px;
-    text-align: center;
-  }
-  .sig-manual-space {
-    height: 44px; /* Space reserved for physical signature */
+    height: 40px; /* Space reserved for physical signature */
     width: 100%;
   }
   .sig-line-drawn {
@@ -936,12 +928,12 @@
     margin: 2px 0 5px 0;
   }
   .sig-title {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     color: var(--cert-primary);
   }
   .sig-subtitle {
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -949,50 +941,19 @@
     margin-top: 1px;
   }
 
-  /* File Input Styles */
-  .logo-upload-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .logo-upload-item {
-    background: #0f172a;
-    border: 1px solid var(--panel-border);
-    border-radius: 6px;
-    padding: 6px;
-    text-align: center;
-  }
-  .logo-upload-item label {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text-muted);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .file-input-btn {
-    font-size: 10px;
-    width: 100%;
-    color: var(--text-muted);
-    background: #1e293b;
-    border: 1px dashed var(--panel-border);
-    padding: 4px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  /* Metadata Footer */
+  /* Metadata Footer Bar */
   .meta-bar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-    font-size: 9.5px;
+    margin-top: 8px;
+    font-size: 9px;
     color: var(--cert-accent);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     border-top: 1px solid rgba(0,0,0,0.08);
-    padding-top: 6px;
+    padding-top: 5px;
   }
 
   /* ---------- PRINT MEDIA OVERRIDES ---------- */
@@ -1008,7 +969,7 @@
       height: 100% !important;
       overflow: visible !important;
     }
-    .app-header, .control-panel, .preview-toolbar {
+    .app-header, .control-panel, .preview-toolbar, .toast-container, .modal-overlay {
       display: none !important;
     }
     .workspace {
@@ -1060,10 +1021,23 @@
         <p>Recognizing Educators Who Empower Fellow Teachers</p>
       </div>
     </div>
+    
     <div class="header-actions">
+      <!-- Direct Persistence Actions -->
+      <button class="btn btn-success" onclick="saveToLocalStorage(true)" title="Save current work to browser memory">💾 Save Certificate</button>
+      <button class="btn btn-accent" onclick="exportJSONFile()" title="Download certificate configuration file (.json)">📁 Export File</button>
+      <button class="btn btn-secondary" onclick="triggerImportJSON()" title="Upload a saved certificate file (.json)">📂 Import File</button>
+      <button class="btn btn-secondary" onclick="openTemplatesModal()" title="View saved template profiles">🔖 My Templates</button>
+
+      <!-- Action Separator -->
+      <div style="width: 1px; height: 24px; background: var(--panel-border); margin: 0 4px;"></div>
+
       <button class="btn btn-outline" id="btnSampleData" onclick="randomizeData()">🎲 Sample Data</button>
       <button class="btn btn-secondary" id="btnReset" onclick="resetDefaults()">🔄 Reset</button>
       <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
+
+      <!-- Hidden JSON File Input -->
+      <input type="file" id="jsonFileInput" accept=".json" style="display:none;" onchange="importJSONFile(event)">
     </div>
   </header>
 
@@ -1072,6 +1046,20 @@
 
     <!-- SIDEBAR CONTROL PANEL -->
     <aside class="control-panel">
+
+      <!-- Storage Status Panel Section -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>💾 Storage & GitHub Host Status</span>
+        </div>
+        <div class="storage-status-badge">
+          <div class="storage-status-dot"></div>
+          <span id="storageStatusText">Auto-Saved in Browser (Ready for GitHub Pages)</span>
+        </div>
+        <p style="font-size: 10px; color: var(--text-muted); margin: 0 0 6px 0; line-height: 1.4;">
+          All form fields, themes, custom uploaded logos, and watermarks are preserved across browser refreshes automatically.
+        </p>
+      </div>
 
       <!-- Preset Selection -->
       <div class="panel-section">
@@ -1137,7 +1125,7 @@
           </div>
         </div>
 
-        <div class="form-group" style="margin-top: 12px;">
+        <div class="form-group" style="margin-top: 10px;">
           <label for="inBorderStyle">Certificate Border Style</label>
           <select id="inBorderStyle" class="form-control" onchange="setBorderStyle(this.value)">
             <option value="border-style-geometric" selected>Elegant Gold & Navy Geometric Shield (New)</option>
@@ -1158,18 +1146,22 @@
           <div class="logo-upload-item">
             <label>Logo 1 (Left)</label>
             <input type="file" id="uploadLogo1" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 1)">
+            <div class="logo-preview-badge" id="logoStatus1" style="display:none;">✓ Loaded</div>
           </div>
           <div class="logo-upload-item">
             <label>Logo 2</label>
             <input type="file" id="uploadLogo2" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 2)">
+            <div class="logo-preview-badge" id="logoStatus2" style="display:none;">✓ Loaded</div>
           </div>
           <div class="logo-upload-item">
             <label>Logo 3</label>
             <input type="file" id="uploadLogo3" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 3)">
+            <div class="logo-preview-badge" id="logoStatus3" style="display:none;">✓ Loaded</div>
           </div>
           <div class="logo-upload-item">
             <label>Logo 4 (Right)</label>
             <input type="file" id="uploadLogo4" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 4)">
+            <div class="logo-preview-badge" id="logoStatus4" style="display:none;">✓ Loaded</div>
           </div>
         </div>
       </div>
@@ -1192,7 +1184,7 @@
           <label for="wmScale">Watermark Size (<span id="wmScaleVal">100%</span>)</label>
           <input type="range" id="wmScale" min="0.5" max="1.6" step="0.05" value="1.0" class="w-full" oninput="updateWatermarkStyle()">
         </div>
-        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px;">
           <label for="toggleTileWm" style="margin-bottom:0; cursor:pointer;">Enable Repeating Tile Pattern</label>
           <input type="checkbox" id="toggleTileWm" onchange="toggleTilePattern(this.checked)" style="accent-color: var(--gold-primary); cursor:pointer;">
         </div>
@@ -1262,21 +1254,21 @@
         </div>
         
         <!-- Sig 1 -->
-        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 8px;">
+        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 6px;">
           <label for="inSig1Name">1. PD Program Coordinator</label>
           <input type="text" id="inSig1Name" class="form-control" value="Amanullah Khan">
           <input type="text" id="inSig1Role" class="form-control" value="PD Program Coordinator" style="margin-top:4px">
         </div>
 
         <!-- Sig 2 -->
-        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 8px;">
+        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 6px;">
           <label for="inSig2Name">2. Director of Education</label>
           <input type="text" id="inSig2Name" class="form-control" value="Dr. Robert Chen">
           <input type="text" id="inSig2Role" class="form-control" value="Director of Education" style="margin-top:4px">
         </div>
 
         <!-- Sig 3 -->
-        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 8px;">
+        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 6px;">
           <label for="inSig3Name">3. CEO</label>
           <input type="text" id="inSig3Name" class="form-control" value="Yusuf Ashworth">
           <input type="text" id="inSig3Role" class="form-control" value="Chief Executive Officer" style="margin-top:4px">
@@ -1292,7 +1284,7 @@
         <label for="zoomRange">Zoom:</label>
         <input type="range" id="zoomRange" min="0.45" max="1.1" step="0.05" value="0.85" oninput="updateZoom(this.value)">
         <span id="zoomVal" style="font-size:12px; font-weight:600; color:#fff; min-width:35px">85%</span>
-        <button class="btn-chip" onclick="fitZoom()" style="margin-left:8px">Fit Screen</button>
+        <button class="btn-chip" onclick="fitZoom()" style="margin-left:6px">Fit Screen</button>
       </div>
 
       <div class="cert-scale-wrapper" id="certScaleWrapper">
@@ -1304,7 +1296,6 @@
           <!-- Exact Metallic Gold & Navy Geometric Vector Border Overlay -->
           <svg class="geometric-border-overlay" viewBox="0 0 1050 742" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <!-- Lustrous Gold Gradient -->
               <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#b8860b"/>
                 <stop offset="25%" stop-color="#e6ca65"/>
@@ -1313,14 +1304,12 @@
                 <stop offset="100%" stop-color="#8a5a00"/>
               </linearGradient>
 
-              <!-- Deep Navy Blue Metallic Shader -->
               <linearGradient id="navyShield" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="var(--cert-primary)"/>
                 <stop offset="60%" stop-color="#071b38"/>
                 <stop offset="100%" stop-color="#030c1c"/>
               </linearGradient>
 
-              <!-- Subtle Drop Shadow for 3D Geometric Depth -->
               <filter id="shadow3d" x="-10%" y="-10%" width="120%" height="120%">
                 <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.35"/>
               </filter>
@@ -1345,26 +1334,22 @@
             <line x1="320" y1="710" x2="730" y2="710" stroke="#5a3d00" stroke-width="1.5" opacity="0.6"/>
           </svg>
 
-          <!-- Al-Rowad Star & Globe Central Watermark Logo -->
+          <!-- Academic Central Watermark -->
           <div class="academic-watermark" id="watermarkContainer">
             <svg id="defaultWmSvg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-              <!-- Outer 8-Pointed Star (Rub el Hizb) Outer Shell -->
               <path d="M100 0 L129.29 29.29 L170.71 29.29 L170.71 70.71 L200 100 L170.71 129.29 L170.71 170.71 L129.29 170.71 L100 200 L70.71 170.71 L29.29 170.71 L29.29 129.29 L0 100 L29.29 70.71 L29.29 29.29 L70.71 29.29 Z" fill="currentColor" opacity="0.15"/>
               <path d="M100 6 L127.5 33.5 L166.5 33.5 L166.5 72.5 L194 100 L166.5 127.5 L166.5 166.5 L127.5 166.5 L100 194 L72.5 166.5 L33.5 166.5 L33.5 127.5 L6 100 L33.5 72.5 L33.5 33.5 L72.5 33.5 Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
               <path d="M100 14 L124.2 38.2 L158.8 38.2 L158.8 72.8 L183.2 100 L158.8 127.2 L158.8 161.8 L124.2 161.8 L100 186 L75.8 161.8 L41.2 161.8 L41.2 127.2 L16.8 100 L41.2 72.8 L41.2 38.2 L75.8 38.2 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
               
-              <!-- Globe Ring & Spherical Grid -->
               <circle cx="100" cy="100" r="48" stroke="currentColor" stroke-width="2" fill="none"/>
               <circle cx="100" cy="100" r="48" fill="currentColor" opacity="0.08"/>
               <ellipse cx="100" cy="100" rx="48" ry="20" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
               <ellipse cx="100" cy="100" rx="20" ry="48" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
               
-              <!-- Simplified Continents Outlines -->
               <path d="M72 82 Q85 75 92 88 Q88 100 76 105 Q68 95 72 82 Z" fill="currentColor" opacity="0.4"/>
               <path d="M105 75 Q125 72 135 85 Q130 110 115 118 Q100 115 102 98 Q112 90 105 75 Z" fill="currentColor" opacity="0.4"/>
               <path d="M110 122 Q122 125 120 138 Q110 142 105 132 Z" fill="currentColor" opacity="0.4"/>
               
-              <!-- Curving Banner Text Top & Bottom Arc Guide Lines -->
               <path id="topArc" d="M 45 100 A 55 55 0 0 1 155 100" fill="none"/>
               <path id="bottomArc" d="M 155 100 A 55 55 0 0 1 45 100" fill="none"/>
               
@@ -1377,7 +1362,7 @@
             </svg>
           </div>
 
-          <!-- Fallback / Switchable Decorative Frames -->
+          <!-- Decorative Frames -->
           <div class="frame-outer"></div>
           <div class="frame-mid"></div>
           <div class="frame-inner"></div>
@@ -1537,7 +1522,41 @@
 
   </div>
 
+  <!-- MODAL: SAVED TEMPLATES PROFILE MANAGER -->
+  <div class="modal-overlay" id="templatesModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>🔖 Saved Certificate Profiles</h3>
+        <button class="btn-chip" onclick="closeTemplatesModal()">✕ Close</button>
+      </div>
+      <div style="margin-bottom:14px; display:flex; gap:8px;">
+        <input type="text" id="newTemplateName" class="form-control" placeholder="Profile Name (e.g. Science Dept 2026)">
+        <button class="btn btn-primary" onclick="saveNamedTemplate()" style="white-space:nowrap;">Save Current</button>
+      </div>
+      <div id="templatesList" style="max-height:260px; overflow-y:auto;">
+        <p style="font-size:12px; color:var(--text-muted); text-align:center;">No custom templates saved yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
   <script>
+    // TOAST NOTIFICATION UTILITY
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<span>${type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️'}</span> ${message}`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
     // Dynamic Awardee Font Switcher
     function updateAwardeeFont(fontName) {
       const card = document.getElementById('certificateCard');
@@ -1555,6 +1574,7 @@
         card.style.setProperty('--recipient-font-style', 'italic');
         card.style.setProperty('--recipient-font-size', '44px');
       }
+      autoSaveTrigger();
     }
 
     // Dynamic Certificate Border Style Switcher
@@ -1563,6 +1583,8 @@
       if (!card) return;
       card.classList.remove('border-style-geometric', 'border-style-filigree', 'border-style-regal', 'border-style-modern');
       card.classList.add(styleClass);
+      document.getElementById('inBorderStyle').value = styleClass;
+      autoSaveTrigger();
     }
 
     // PRESET DATA STORE
@@ -1575,13 +1597,16 @@
         citation: "for exceptional leadership, pedagogical innovation, and dedicated facilitation in conducting the peer-to-peer professional development session for school faculty:",
         date: "August 15, 2026",
         code: "AIS-PD-2026-8842",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Amanullah Khan",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Robert Chen",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "navy"
+        theme: "navy",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       },
       ai: {
         trainerName: "Dr. Fatima Al-Zahra",
@@ -1591,13 +1616,16 @@
         citation: "for outstanding expertise, forward-thinking guidance, and inspiring facilitation during the hands-on faculty workshop series on:",
         date: "September 02, 2026",
         code: "AIS-AI-2026-9011",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Sarah Jenkins",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Robert Chen",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "emerald"
+        theme: "emerald",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       },
       diff: {
         trainerName: "David Vance, M.Ed.",
@@ -1607,13 +1635,16 @@
         citation: "in recognition of invaluable contributions and exemplary workshop leadership empowering educators to implement:",
         date: "October 10, 2026",
         code: "AIS-DI-2026-4410",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Mariam Al-Hassan",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Elizabeth Vance",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "burgundy"
+        theme: "burgundy",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       },
       assessment: {
         trainerName: "Elena Rostova",
@@ -1623,13 +1654,16 @@
         citation: "for masterclass facilitation and empowering peer educators with actionable techniques during the professional session on:",
         date: "November 18, 2026",
         code: "AIS-FA-2026-1205",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Amanullah Khan",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Robert Chen",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "slate"
+        theme: "slate",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       },
       stem: {
         trainerName: "Tariq Mansoor",
@@ -1639,13 +1673,16 @@
         citation: "for exemplary leadership, creative workshop design, and dedication to fostering active learning through:",
         date: "December 05, 2026",
         code: "AIS-STEM-2026-7731",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Kareem Abdul-Nasser",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Robert Chen",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "midnight"
+        theme: "midnight",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       },
       religion: {
         trainerName: "Sheikh Abdulrahman Al-Mansoori",
@@ -1655,13 +1692,16 @@
         citation: "for outstanding devotion, scholarly leadership, and exemplary facilitation in conducting the faculty enrichment workshop on:",
         date: "September 15, 2026",
         code: "AIS-REL-2026-3301",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Amanullah Khan",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Robert Chen",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "emerald"
+        theme: "emerald",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       },
       language: {
         trainerName: "Dr. Sarah Al-Hassan",
@@ -1671,13 +1711,16 @@
         citation: "for exceptional leadership, linguistic expertise, and inspiring workshop facilitation in the peer training session on:",
         date: "October 05, 2026",
         code: "AIS-LANG-2026-5520",
+        instName: "AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER",
         sig1Name: "Mariam Al-Hassan",
         sig1Role: "PD Program Coordinator",
         sig2Name: "Dr. Robert Chen",
         sig2Role: "Director of Education",
         sig3Name: "Yusuf Ashworth",
         sig3Role: "Chief Executive Officer",
-        theme: "burgundy"
+        theme: "burgundy",
+        borderStyle: "border-style-geometric",
+        fontStyle: "Cormorant Garamond"
       }
     };
 
@@ -1686,6 +1729,8 @@
       "Laila Al-Sabah", "Prof. Jonathan Sterling", "Hassan Al-Mansoor", "Elena Rostova"
     ];
 
+    // LOGOS & WATERMARK BASE64 DATA STORE
+    let uploadedLogosData = { 1: null, 2: null, 3: null, 4: null };
     let uploadedWatermarkData = null;
 
     function handleWatermarkUpload(event) {
@@ -1698,6 +1743,8 @@
         uploadedWatermarkData = e.target.result;
         wmContainer.innerHTML = `<img src="${uploadedWatermarkData}" alt="Watermark Logo">`;
         updateTiledPattern();
+        autoSaveTrigger();
+        showToast("Custom watermark image uploaded and saved!", "success");
       };
       reader.readAsDataURL(file);
     }
@@ -1731,6 +1778,7 @@
         </svg>
       `;
       updateTiledPattern();
+      autoSaveTrigger();
     }
 
     function updateWatermarkStyle() {
@@ -1742,6 +1790,7 @@
 
       document.documentElement.style.setProperty('--wm-opacity', opacity);
       document.documentElement.style.setProperty('--wm-scale', scale);
+      autoSaveTrigger();
     }
 
     function toggleTilePattern(enabled) {
@@ -1752,6 +1801,7 @@
       } else {
         tileBg.style.display = 'none';
       }
+      autoSaveTrigger();
     }
 
     function updateTiledPattern() {
@@ -1773,22 +1823,33 @@
         }
         const fileInput = document.getElementById(`uploadLogo${i}`);
         if (fileInput) fileInput.value = '';
+        const badge = document.getElementById(`logoStatus${i}`);
+        if (badge) badge.style.display = 'none';
+        uploadedLogosData[i] = null;
       }
+      autoSaveTrigger();
+      showToast("Logos cleared", "info");
     }
 
     function handleLogoUpload(event, num) {
       const file = event.target.files[0];
       const logoBox = document.getElementById(`logoBox${num}`);
+      const badge = document.getElementById(`logoStatus${num}`);
       if (!file || !logoBox) return;
 
       const reader = new FileReader();
       reader.onload = function(e) {
+        uploadedLogosData[num] = e.target.result;
         logoBox.innerHTML = `<img src="${e.target.result}" alt="Header Logo ${num}">`;
         logoBox.style.display = 'flex';
+        if (badge) badge.style.display = 'flex';
+        autoSaveTrigger();
+        showToast(`Logo ${num} uploaded and auto-saved!`, "success");
       };
       reader.readAsDataURL(file);
     }
 
+    // FORM INPUT BINDINGS
     const inputs = {
       trainerName: document.getElementById('inTrainerName'),
       trainerRole: document.getElementById('inTrainerRole'),
@@ -1821,6 +1882,7 @@
       if (inputs.sig2Role) document.getElementById('outSig2Role').innerText = inputs.sig2Role.value;
       if (inputs.sig3Name) document.getElementById('outSig3Name').innerText = inputs.sig3Name.value;
       if (inputs.sig3Role) document.getElementById('outSig3Role').innerText = inputs.sig3Role.value;
+      autoSaveTrigger();
     }
 
     Object.values(inputs).forEach(input => {
@@ -1832,6 +1894,7 @@
       document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
       const activeOption = document.getElementById(`theme-${themeName}`);
       if (activeOption) activeOption.classList.add('active');
+      autoSaveTrigger();
     }
 
     function loadPreset(key) {
@@ -1845,6 +1908,7 @@
       inputs.citation.value = data.citation;
       inputs.date.value = data.date;
       inputs.certCode.value = data.code;
+      if (data.instName) inputs.instName.value = data.instName;
       inputs.sig1Name.value = data.sig1Name;
       inputs.sig1Role.value = data.sig1Role;
       inputs.sig2Name.value = data.sig2Name;
@@ -1853,6 +1917,12 @@
       inputs.sig3Role.value = data.sig3Role;
 
       setTheme(data.theme);
+      if (data.borderStyle) setBorderStyle(data.borderStyle);
+      if (data.fontStyle) {
+        document.getElementById('inAwardeeFont').value = data.fontStyle;
+        updateAwardeeFont(data.fontStyle);
+      }
+
       updateCertificate();
 
       document.querySelectorAll('.btn-chip').forEach(btn => btn.classList.remove('active'));
@@ -1882,19 +1952,283 @@
       inputs.trainerName.value = randomName;
       inputs.certCode.value = `AIS-PD-2026-${Math.floor(1000 + Math.random() * 9000)}`;
       updateCertificate();
+      showToast("Sample recipient name generated", "info");
     }
 
     function resetDefaults() {
       loadPreset('visual');
       setBorderStyle('border-style-geometric');
       resetLogos();
+      resetWatermark();
       fitZoom();
+      showToast("Reset to default layout", "info");
     }
 
+    // =========================================================================
+    // =========================================================================
+    const LOCAL_STORAGE_KEY = 'ais_cert_generator_state_v2';
+    const LOCAL_STORAGE_PROFILES_KEY = 'ais_cert_generator_profiles_v2';
+    let autoSaveTimer = null;
+
+    function getFullStateObject() {
+      return {
+        timestamp: new Date().toISOString(),
+        inputs: {
+          trainerName: inputs.trainerName.value,
+          trainerRole: inputs.trainerRole.value,
+          topic: inputs.topic.value,
+          program: inputs.program.value,
+          citation: inputs.citation.value,
+          date: inputs.date.value,
+          certCode: inputs.certCode.value,
+          instName: inputs.instName.value,
+          sig1Name: inputs.sig1Name.value,
+          sig1Role: inputs.sig1Role.value,
+          sig2Name: inputs.sig2Name.value,
+          sig2Role: inputs.sig2Role.value,
+          sig3Name: inputs.sig3Name.value,
+          sig3Role: inputs.sig3Role.value
+        },
+        theme: document.body.getAttribute('data-theme') || 'navy',
+        borderStyle: document.getElementById('inBorderStyle').value || 'border-style-geometric',
+        awardeeFont: document.getElementById('inAwardeeFont').value || 'Cormorant Garamond',
+        watermark: {
+          opacity: document.getElementById('wmOpacity').value,
+          scale: document.getElementById('wmScale').value,
+          tiled: document.getElementById('toggleTileWm').checked,
+          data: uploadedWatermarkData
+        },
+        logos: uploadedLogosData
+      };
+    }
+
+    function autoSaveTrigger() {
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(() => {
+        saveToLocalStorage(false);
+      }, 500);
+    }
+
+    function saveToLocalStorage(showToastNotification = false) {
+      try {
+        const state = getFullStateObject();
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
+        const statusText = document.getElementById('storageStatusText');
+        if (statusText) statusText.innerText = `Auto-Saved (${new Date().toLocaleTimeString()})`;
+        if (showToastNotification) {
+          showToast("Certificate saved to browser storage!", "success");
+        }
+      } catch (err) {
+        console.error("LocalStorage save error:", err);
+        if (showToastNotification) {
+          showToast("Storage quota exceeded for large images. Try smaller logos.", "warning");
+        }
+      }
+    }
+
+    function restoreFromLocalStorage() {
+      try {
+        const savedRaw = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (!savedRaw) return false;
+
+        const state = JSON.parse(savedRaw);
+        applyStateObject(state);
+        showToast("Restored your previous certificate session!", "success");
+        return true;
+      } catch (err) {
+        console.error("Restore error:", err);
+        return false;
+      }
+    }
+
+    function applyStateObject(state) {
+      if (!state) return;
+
+      if (state.inputs) {
+        Object.keys(state.inputs).forEach(key => {
+          if (inputs[key] && state.inputs[key] !== undefined) {
+            inputs[key].value = state.inputs[key];
+          }
+        });
+      }
+
+      if (state.theme) setTheme(state.theme);
+      if (state.borderStyle) setBorderStyle(state.borderStyle);
+      if (state.awardeeFont) {
+        document.getElementById('inAwardeeFont').value = state.awardeeFont;
+        updateAwardeeFont(state.awardeeFont);
+      }
+
+      if (state.watermark) {
+        if (state.watermark.opacity !== undefined) {
+          document.getElementById('wmOpacity').value = state.watermark.opacity;
+        }
+        if (state.watermark.scale !== undefined) {
+          document.getElementById('wmScale').value = state.watermark.scale;
+        }
+        updateWatermarkStyle();
+
+        if (state.watermark.tiled !== undefined) {
+          document.getElementById('toggleTileWm').checked = state.watermark.tiled;
+          toggleTilePattern(state.watermark.tiled);
+        }
+
+        if (state.watermark.data) {
+          uploadedWatermarkData = state.watermark.data;
+          document.getElementById('watermarkContainer').innerHTML = `<img src="${uploadedWatermarkData}" alt="Watermark Logo">`;
+          updateTiledPattern();
+        }
+      }
+
+      if (state.logos) {
+        uploadedLogosData = state.logos;
+        for (let i = 1; i <= 4; i++) {
+          const logoBox = document.getElementById(`logoBox${i}`);
+          const badge = document.getElementById(`logoStatus${i}`);
+          if (uploadedLogosData[i] && logoBox) {
+            logoBox.innerHTML = `<img src="${uploadedLogosData[i]}" alt="Header Logo ${i}">`;
+            logoBox.style.display = 'flex';
+            if (badge) badge.style.display = 'flex';
+          }
+        }
+      }
+
+      updateCertificate();
+    }
+
+    // EXPORT TO JSON FILE
+    function exportJSONFile() {
+      const state = getFullStateObject();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const downloadAnchor = document.createElement('a');
+      const filename = `certificate_${state.inputs.trainerName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${Date.now()}.json`;
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", filename);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("Downloaded certificate JSON file!", "success");
+    }
+
+    // IMPORT FROM JSON FILE
+    function triggerImportJSON() {
+      document.getElementById('jsonFileInput').click();
+    }
+
+    function importJSONFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const state = JSON.parse(e.target.result);
+          applyStateObject(state);
+          saveToLocalStorage(false);
+          showToast("Certificate imported successfully!", "success");
+        } catch (err) {
+          showToast("Invalid certificate JSON file.", "warning");
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    // SAVED NAMED PROFILES / TEMPLATES SYSTEM
+    function openTemplatesModal() {
+      renderTemplatesList();
+      document.getElementById('templatesModal').classList.add('active');
+    }
+
+    function closeTemplatesModal() {
+      document.getElementById('templatesModal').classList.remove('active');
+    }
+
+    function getSavedProfiles() {
+      try {
+        const raw = localStorage.getItem(LOCAL_STORAGE_PROFILES_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (err) {
+        return [];
+      }
+    }
+
+    function saveNamedTemplate() {
+      const input = document.getElementById('newTemplateName');
+      const name = input.value.trim();
+      if (!name) {
+        showToast("Please enter a profile name.", "warning");
+        return;
+      }
+
+      const profiles = getSavedProfiles();
+      const newProfile = {
+        id: 'prof_' + Date.now(),
+        name: name,
+        date: new Date().toLocaleDateString(),
+        state: getFullStateObject()
+      };
+
+      profiles.unshift(newProfile);
+      localStorage.setItem(LOCAL_STORAGE_PROFILES_KEY, JSON.stringify(profiles));
+      input.value = '';
+      renderTemplatesList();
+      showToast(`Saved template "${name}"!`, "success");
+    }
+
+    function loadSavedProfile(id) {
+      const profiles = getSavedProfiles();
+      const target = profiles.find(p => p.id === id);
+      if (target && target.state) {
+        applyStateObject(target.state);
+        saveToLocalStorage(false);
+        closeTemplatesModal();
+        showToast(`Loaded profile "${target.name}"`, "success");
+      }
+    }
+
+    function deleteSavedProfile(id, event) {
+      event.stopPropagation();
+      let profiles = getSavedProfiles();
+      profiles = profiles.filter(p => p.id !== id);
+      localStorage.setItem(LOCAL_STORAGE_PROFILES_KEY, JSON.stringify(profiles));
+      renderTemplatesList();
+      showToast("Template deleted", "info");
+    }
+
+    function renderTemplatesList() {
+      const container = document.getElementById('templatesList');
+      const profiles = getSavedProfiles();
+
+      if (profiles.length === 0) {
+        container.innerHTML = `<p style="font-size:12px; color:var(--text-muted); text-align:center; padding:12px 0;">No custom profiles saved yet.</p>`;
+        return;
+      }
+
+      container.innerHTML = profiles.map(p => `
+        <div class="template-item">
+          <div>
+            <div style="font-size:13px; font-weight:700; color:#fff;">${p.name}</div>
+            <div style="font-size:10px; color:var(--text-muted);">Saved: ${p.date}</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-accent" onclick="loadSavedProfile('${p.id}')" style="font-size:10px; padding:4px 8px;">Load</button>
+            <button class="btn btn-outline" onclick="deleteSavedProfile('${p.id}', event)" style="font-size:10px; padding:4px 8px; color:#ef4444;">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // INITIALIZATION ON WINDOW LOAD
     window.onload = function() {
       setBorderStyle('border-style-geometric');
       updateAwardeeFont(document.getElementById('inAwardeeFont').value || 'Cormorant Garamond');
-      updateCertificate();
+      
+      const restored = restoreFromLocalStorage();
+      if (!restored) {
+        updateCertificate();
+      }
+      
       fitZoom();
       window.addEventListener('resize', fitZoom);
     };

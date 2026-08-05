@@ -80,6 +80,51 @@
     --cert-border-color: #eab308;
     --cert-text-dark: #f8fafc;
   }
+  body[data-theme="sapphire"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #f0f4f8;
+    --cert-primary: #1e3a8a;
+    --cert-secondary: #d97706;
+    --cert-accent: #3b82f6;
+    --cert-border-color: #1e3a8a;
+    --cert-text-dark: #0f172a;
+  }
+  body[data-theme="amethyst"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #f7f4fa;
+    --cert-primary: #4c1d95;
+    --cert-secondary: #c59b27;
+    --cert-accent: #7e22ce;
+    --cert-border-color: #4c1d95;
+    --cert-text-dark: #1e1b4b;
+  }
+  body[data-theme="parchment"] {
+    --cert-bg-start: #fffdf5;
+    --cert-bg-end: #f5ebd7;
+    --cert-primary: #3f2e18;
+    --cert-secondary: #a16207;
+    --cert-accent: #78350f;
+    --cert-border-color: #78350f;
+    --cert-text-dark: #291a0c;
+  }
+  body[data-theme="rosegold"] {
+    --cert-bg-start: #111827;
+    --cert-bg-end: #030712;
+    --cert-primary: #fdf2f8;
+    --cert-secondary: #fb7185;
+    --cert-accent: #f472b6;
+    --cert-border-color: #fb7185;
+    --cert-text-dark: #fdf2f8;
+  }
+  body[data-theme="forest"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #f1f7f4;
+    --cert-primary: #14532d;
+    --cert-secondary: #b8860b;
+    --cert-accent: #166534;
+    --cert-border-color: #14532d;
+    --cert-text-dark: #052e16;
+  }
 
   * { box-sizing: border-box; }
 
@@ -377,6 +422,17 @@
     transition: background 0.3s ease, color 0.3s ease;
   }
 
+  /* Geometric SVG Border Overlay */
+  .geometric-border-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    display: block;
+  }
+
   /* Background Watermark Pattern */
   .guilloche-bg {
     position: absolute;
@@ -424,13 +480,14 @@
     display: none;
   }
 
-  /* Decorative Borders */
+  /* Traditional Decorative Borders (Fallback / Switchable) */
   .frame-outer {
     position: absolute;
     inset: 16px;
     border: 2px solid var(--cert-border-color);
     pointer-events: none;
     transition: border-color 0.3s ease;
+    display: none;
   }
   .frame-mid {
     position: absolute;
@@ -439,6 +496,7 @@
     opacity: 0.8;
     pointer-events: none;
     transition: border-color 0.3s ease;
+    display: none;
   }
   .frame-inner {
     position: absolute;
@@ -446,19 +504,60 @@
     border: 2px double var(--cert-secondary);
     pointer-events: none;
     transition: border-color 0.3s ease;
+    display: none;
   }
 
   /* Corner Flourishes */
   .corner-svg {
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     pointer-events: none;
+    z-index: 5;
+    display: none;
   }
-  .corner-svg.tl { top: 12px; left: 12px; }
-  .corner-svg.tr { top: 12px; right: 12px; transform: scaleX(-1); }
-  .corner-svg.bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
-  .corner-svg.br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+  .corner-svg.tl { top: 10px; left: 10px; }
+  .corner-svg.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+  .corner-svg.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+  .corner-svg.br { bottom: 10px; right: 10px; transform: scale(-1, -1); }
+
+  /* Frame Node Rosettes */
+  .frame-node {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: var(--cert-secondary);
+    border: 2px solid var(--cert-primary);
+    transform: rotate(45deg);
+    z-index: 6;
+    pointer-events: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.15);
+    display: none;
+  }
+  .frame-node.tl { top: 22px; left: 22px; }
+  .frame-node.tr { top: 22px; right: 22px; }
+  .frame-node.bl { bottom: 22px; left: 22px; }
+  .frame-node.br { bottom: 22px; right: 22px; }
+
+  /* Dynamic Border Style Configurations */
+  .certificate-card.border-style-geometric .geometric-border-overlay { display: block; }
+
+  .certificate-card.border-style-filigree .geometric-border-overlay { display: none; }
+  .certificate-card.border-style-filigree .frame-outer { display: block; inset: 14px; border: 3px double var(--cert-border-color); }
+  .certificate-card.border-style-filigree .frame-mid { display: block; inset: 22px; border: 1px dashed var(--cert-secondary); }
+  .certificate-card.border-style-filigree .frame-inner { display: block; inset: 28px; border: 2px stroke var(--cert-border-color); }
+  .certificate-card.border-style-filigree .corner-svg,
+  .certificate-card.border-style-filigree .frame-node { display: block; }
+
+  .certificate-card.border-style-modern .geometric-border-overlay { display: none; }
+  .certificate-card.border-style-modern .frame-outer { display: block; inset: 16px; border: 4px solid var(--cert-secondary); }
+  .certificate-card.border-style-modern .frame-mid { display: block; inset: 24px; border: 1px solid var(--cert-primary); }
+  .certificate-card.border-style-modern .frame-inner { display: none; }
+
+  .certificate-card.border-style-regal .geometric-border-overlay { display: none; }
+  .certificate-card.border-style-regal .frame-outer { display: block; inset: 12px; border: 1px solid var(--cert-secondary); }
+  .certificate-card.border-style-regal .frame-mid { display: block; inset: 18px; border: 4px double var(--cert-primary); }
+  .certificate-card.border-style-regal .frame-inner { display: block; inset: 32px; border: 1px solid var(--cert-secondary); }
 
   /* Inner Certificate Layout */
   .cert-body {
@@ -467,8 +566,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 36px 60px 30px 60px;
+    padding: 30px 75px 88px 75px;
     text-align: center;
+    z-index: 10;
   }
 
   /* 4 Logos Header Styling */
@@ -476,14 +576,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
-    min-height: 60px;
-    margin-bottom: 20px;
+    gap: 20px;
+    min-height: 48px;
+    margin-bottom: 6px;
     width: 100%;
   }
   .logo-box {
-    max-width: 180px;
-    height: 60px;
+    max-width: 170px;
+    height: 48px;
     display: none; /* Hidden by default if no image uploaded */
     align-items: center;
     justify-content: center;
@@ -500,11 +600,184 @@
   .institution-name {
     font-family: 'Cinzel', serif;
     font-weight: 800;
-    font-size: 20px;
-    letter-spacing: 0.26em;
+    font-size: 18px;
+    letter-spacing: 0.22em;
     color: var(--cert-primary);
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 2px;
+    line-height: 1.3;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: color 0.3s ease;
+  }
+
+  .facilitator-badge-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(197, 155, 39, 0.12);
+    border: 1px solid var(--cert-secondary);
+    border-radius: 20px;
+    padding: 3px 16px;
+    margin-top: 5px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--cert-primary);
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .cert-main-title {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--cert-primary);
+    margin: 6px 0 2px 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .cert-main-title span {
+    color: var(--cert-secondary);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .title-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 3px 0 8px 0;
+    width: 220px;
+  }
+  .title-divider .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cert-secondary), transparent);
+  }
+  .title-divider .gem {
+    width: 6px;
+    height: 6px;
+    background: var(--cert-secondary);
+    transform: rotate(45deg);
+  }
+
+  .presentation-text {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--cert-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .recipient-container {
+    margin: 2px 0 6px 0;
+    position: relative;
+    display: inline-block;
+    min-width: 65%;
+  }
+  .recipient-name-text {
+    font-family: var(--recipient-font-family, 'Cormorant Garamond'), serif;
+    font-size: var(--recipient-font-size, 42px);
+    font-weight: 700;
+    font-style: var(--recipient-font-style, italic);
+    color: var(--cert-primary);
+    line-height: 1.1;
+    padding-bottom: 3px;
+    transition: color 0.3s ease, font-family 0.2s ease;
+  }
+  .recipient-underline {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cert-secondary), transparent);
+    width: 100%;
+  }
+
+  .citation-body {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--cert-text-dark);
+    opacity: 0.9;
+    max-width: 760px;
+    margin: 0 auto;
+    font-weight: 500;
+  }
+
+  .workshop-topic-box {
+    margin: 6px 0 4px 0;
+  }
+  .workshop-topic-text {
+    font-family: 'Cinzel', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--cert-primary);
+    letter-spacing: 0.02em;
+    transition: color 0.3s ease;
+  }
+
+  .program-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cert-secondary);
+    margin-top: 2px;
+  }
+
+  .flex-spacer { flex: 1; }
+
+  /* Footer Section: 3 Signatures Layout */
+  .cert-footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: flex-end;
+    margin-top: 10px;
+    padding-top: 2px;
+  }
+
+  .sig-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sig-wrapper {
+    width: 100%;
+    max-width: 220px;
+    text-align: center;
+  }
+  .sig-manual-space {
+    height: 36px; /* Space reserved for physical signature */
+    width: 100%;
+  }
+  .logo-box {
+    max-width: 180px;
+    height: 55px;
+    display: none; /* Hidden by default if no image uploaded */
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+  }
+  .logo-box img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .institution-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.24em;
+    color: var(--cert-primary);
+    text-transform: uppercase;
+    margin-top: 2px;
     line-height: 1.3;
     text-shadow: 0 1px 2px rgba(0,0,0,0.05);
     transition: color 0.3s ease;
@@ -518,7 +791,7 @@
     border: 1px solid var(--cert-secondary);
     border-radius: 20px;
     padding: 4px 18px;
-    margin-top: 8px;
+    margin-top: 6px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -580,14 +853,14 @@
     min-width: 65%;
   }
   .recipient-name-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 44px;
+    font-family: var(--recipient-font-family, 'Cormorant Garamond'), serif;
+    font-size: var(--recipient-font-size, 44px);
     font-weight: 700;
-    font-style: italic;
+    font-style: var(--recipient-font-style, italic);
     color: var(--cert-primary);
     line-height: 1.1;
     padding-bottom: 4px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, font-family 0.2s ease;
   }
   .recipient-underline {
     height: 2px;
@@ -822,29 +1095,59 @@
       <!-- Theme & Style Options -->
       <div class="panel-section">
         <div class="panel-section-title">
-          <span>🎨 Color Palette</span>
+          <span>🎨 Color Palette (10 Styles)</span>
         </div>
         <div class="theme-grid">
           <div class="theme-option active" onclick="setTheme('navy')" id="theme-navy" title="Royal Navy & Gold">
             <div class="theme-color-swatch" style="background:#0b2347"></div>
-            <span style="font-size:10px; color:#cbd5e1">Navy</span>
+            <span style="font-size:9px; color:#cbd5e1">Navy</span>
           </div>
           <div class="theme-option" onclick="setTheme('emerald')" id="theme-emerald" title="Emerald & Amber">
             <div class="theme-color-swatch" style="background:#064e3b"></div>
-            <span style="font-size:10px; color:#cbd5e1">Emerald</span>
+            <span style="font-size:9px; color:#cbd5e1">Emerald</span>
           </div>
           <div class="theme-option" onclick="setTheme('burgundy')" id="theme-burgundy" title="Burgundy & Gold">
             <div class="theme-color-swatch" style="background:#581c87"></div>
-            <span style="font-size:10px; color:#cbd5e1">Burgundy</span>
+            <span style="font-size:9px; color:#cbd5e1">Burgundy</span>
           </div>
           <div class="theme-option" onclick="setTheme('slate')" id="theme-slate" title="Slate & Platinum">
             <div class="theme-color-swatch" style="background:#1e293b"></div>
-            <span style="font-size:10px; color:#cbd5e1">Slate</span>
+            <span style="font-size:9px; color:#cbd5e1">Slate</span>
           </div>
           <div class="theme-option" onclick="setTheme('midnight')" id="theme-midnight" title="Midnight Onyx">
             <div class="theme-color-swatch" style="background:#020617; border: 1px solid #eab308"></div>
-            <span style="font-size:10px; color:#cbd5e1">Dark</span>
+            <span style="font-size:9px; color:#cbd5e1">Dark</span>
           </div>
+          <div class="theme-option" onclick="setTheme('sapphire')" id="theme-sapphire" title="Sapphire & Amber">
+            <div class="theme-color-swatch" style="background:#1e3a8a"></div>
+            <span style="font-size:9px; color:#cbd5e1">Sapphire</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('amethyst')" id="theme-amethyst" title="Amethyst & Gold">
+            <div class="theme-color-swatch" style="background:#4c1d95"></div>
+            <span style="font-size:9px; color:#cbd5e1">Amethyst</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('parchment')" id="theme-parchment" title="Vintage Parchment">
+            <div class="theme-color-swatch" style="background:#f5ebd7"></div>
+            <span style="font-size:9px; color:#cbd5e1">Parchment</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('rosegold')" id="theme-rosegold" title="Onyx & Rose Gold">
+            <div class="theme-color-swatch" style="background:#030712; border:1px solid #fb7185"></div>
+            <span style="font-size:9px; color:#cbd5e1">Rose Gold</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('forest')" id="theme-forest" title="Forest & Gold">
+            <div class="theme-color-swatch" style="background:#14532d"></div>
+            <span style="font-size:9px; color:#cbd5e1">Forest</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 12px;">
+          <label for="inBorderStyle">Certificate Border Style</label>
+          <select id="inBorderStyle" class="form-control" onchange="setBorderStyle(this.value)">
+            <option value="border-style-geometric" selected>Elegant Gold & Navy Geometric Shield (New)</option>
+            <option value="border-style-filigree">Ornate Filigree Crest (Classic)</option>
+            <option value="border-style-regal">Regal Imperial Frame</option>
+            <option value="border-style-modern">Sleek Contemporary Gold</option>
+          </select>
         </div>
       </div>
 
@@ -906,6 +1209,17 @@
         <div class="form-group">
           <label for="inTrainerName">Recipient Name</label>
           <input type="text" id="inTrainerName" class="form-control" value="Mohamed Ali Qureshi">
+        </div>
+        <div class="form-group">
+          <label for="inAwardeeFont">Awardee Name Font Style</label>
+          <select id="inAwardeeFont" class="form-control" onchange="updateAwardeeFont(this.value)">
+            <option value="Cormorant Garamond" selected>Cormorant Garamond (Classic Italic)</option>
+            <option value="Great Vibes">Great Vibes (Formal Calligraphy)</option>
+            <option value="Alex Brush">Alex Brush (Smooth Flourish Script)</option>
+            <option value="Pinyon Script">Pinyon Script (Heritage Script)</option>
+            <option value="Montez">Montez (Playful Elegance)</option>
+            <option value="Cinzel">Cinzel (Roman All-Caps Serif)</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="inTrainerRole">Badge Subtitle</label>
@@ -985,10 +1299,54 @@
       </div>
 
       <div class="cert-scale-wrapper" id="certScaleWrapper">
-        <div class="certificate-card" id="certificateCard">
+        <div class="certificate-card border-style-geometric" id="certificateCard">
           
           <div class="guilloche-bg"></div>
           <div class="tiled-watermark-bg" id="tiledWatermarkBg"></div>
+
+          <!-- Exact Metallic Gold & Navy Geometric Vector Border Overlay -->
+          <svg class="geometric-border-overlay" viewBox="0 0 1050 742" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Lustrous Gold Gradient -->
+              <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b8860b"/>
+                <stop offset="25%" stop-color="#e6ca65"/>
+                <stop offset="50%" stop-color="#fff5c0"/>
+                <stop offset="75%" stop-color="#c59b27"/>
+                <stop offset="100%" stop-color="#8a5a00"/>
+              </linearGradient>
+
+              <!-- Deep Navy Blue Metallic Shader -->
+              <linearGradient id="navyShield" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="var(--cert-primary)"/>
+                <stop offset="60%" stop-color="#071b38"/>
+                <stop offset="100%" stop-color="#030c1c"/>
+              </linearGradient>
+
+              <!-- Subtle Drop Shadow for 3D Geometric Depth -->
+              <filter id="shadow3d" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+
+            <!-- Outer Gold Perimeter Line -->
+            <rect x="18" y="18" width="1014" height="706" rx="2" stroke="url(#goldRibbon)" stroke-width="12" fill="none"/>
+
+            <!-- Top Stepped Gold Corner Inner Line -->
+            <path d="M 38 380 L 38 48 L 56 48 L 56 32 L 994 32 L 994 48 L 1012 48 L 1012 380" stroke="url(#goldRibbon)" stroke-width="3" fill="none"/>
+
+            <!-- Left Navy Shield Block & Curved Accent -->
+            <path d="M 12 330 C 12 365 48 370 48 410 L 48 672 C 48 688 60 700 76 700 L 290 700 C 305 700 315 712 325 730 L 12 730 Z" fill="url(#navyShield)" filter="url(#shadow3d)"/>
+            <path d="M 12 330 C 12 365 48 370 48 410 L 48 672 C 48 688 60 700 76 700 L 290 700 C 305 700 315 712 325 730" stroke="url(#goldRibbon)" stroke-width="5" fill="none"/>
+
+            <!-- Right Navy Shield Block & Curved Accent (Mirrored) -->
+            <path d="M 1038 330 C 1038 365 1002 370 1002 410 L 1002 672 C 1002 688 990 700 974 700 L 760 700 C 745 700 735 712 725 730 L 1038 730 Z" fill="url(#navyShield)" filter="url(#shadow3d)"/>
+            <path d="M 1038 330 C 1038 365 1002 370 1002 410 L 1002 672 C 1002 688 990 700 974 700 L 760 700 C 745 700 735 712 725 730" stroke="url(#goldRibbon)" stroke-width="5" fill="none"/>
+
+            <!-- Bottom Center Golden Ribbon Bar -->
+            <rect x="290" y="700" width="470" height="20" fill="url(#goldRibbon)" rx="2" filter="url(#shadow3d)"/>
+            <line x1="320" y1="710" x2="730" y2="710" stroke="#5a3d00" stroke-width="1.5" opacity="0.6"/>
+          </svg>
 
           <!-- Al-Rowad Star & Globe Central Watermark Logo -->
           <div class="academic-watermark" id="watermarkContainer">
@@ -1022,53 +1380,75 @@
             </svg>
           </div>
 
-          <!-- Decorative Frames -->
+          <!-- Fallback / Switchable Decorative Frames -->
           <div class="frame-outer"></div>
           <div class="frame-mid"></div>
           <div class="frame-inner"></div>
 
-          <!-- SVG Corner Ornaments -->
+          <!-- Frame Node Rosettes -->
+          <div class="frame-node tl"></div>
+          <div class="frame-node tr"></div>
+          <div class="frame-node bl"></div>
+          <div class="frame-node br"></div>
+
+          <!-- Corner Ornaments -->
           <div class="corner-svg tl">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
-              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
-              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
-              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
-              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 50V4H50" stroke="var(--cert-primary)" stroke-width="3"/>
+              <path d="M10 65V10H65" stroke="var(--cert-secondary)" stroke-width="1.8"/>
+              <path d="M18 80V18H80" stroke="var(--cert-primary)" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+              <path d="M10 10 C 30 30, 40 15, 55 10 C 70 5, 80 25, 90 20 C 100 15, 105 5, 115 5" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M10 10 C 30 30, 15 40, 10 55 C 5 70, 25 80, 20 90 C 15 100, 5 105, 5 115" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M25 25 C 45 45, 65 30, 75 45 C 80 52, 70 65, 55 55 C 45 48, 48 35, 35 35 Z" fill="var(--cert-secondary)" opacity="0.25" stroke="var(--cert-secondary)" stroke-width="1"/>
+              <circle cx="10" cy="10" r="5" fill="var(--cert-secondary)" stroke="var(--cert-primary)" stroke-width="1"/>
+              <circle cx="28" cy="28" r="3" fill="var(--cert-primary)"/>
+              <path d="M10 10 Q 40 40 50 50" stroke="var(--cert-secondary)" stroke-width="1.2" fill="none"/>
             </svg>
           </div>
           <div class="corner-svg tr">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
-              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
-              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
-              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
-              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 50V4H50" stroke="var(--cert-primary)" stroke-width="3"/>
+              <path d="M10 65V10H65" stroke="var(--cert-secondary)" stroke-width="1.8"/>
+              <path d="M18 80V18H80" stroke="var(--cert-primary)" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+              <path d="M10 10 C 30 30, 40 15, 55 10 C 70 5, 80 25, 90 20 C 100 15, 105 5, 115 5" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M10 10 C 30 30, 15 40, 10 55 C 5 70, 25 80, 20 90 C 15 100, 5 105, 5 115" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M25 25 C 45 45, 65 30, 75 45 C 80 52, 70 65, 55 55 C 45 48, 48 35, 35 35 Z" fill="var(--cert-secondary)" opacity="0.25" stroke="var(--cert-secondary)" stroke-width="1"/>
+              <circle cx="10" cy="10" r="5" fill="var(--cert-secondary)" stroke="var(--cert-primary)" stroke-width="1"/>
+              <circle cx="28" cy="28" r="3" fill="var(--cert-primary)"/>
+              <path d="M10 10 Q 40 40 50 50" stroke="var(--cert-secondary)" stroke-width="1.2" fill="none"/>
             </svg>
           </div>
           <div class="corner-svg bl">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
-              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
-              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
-              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
-              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 50V4H50" stroke="var(--cert-primary)" stroke-width="3"/>
+              <path d="M10 65V10H65" stroke="var(--cert-secondary)" stroke-width="1.8"/>
+              <path d="M18 80V18H80" stroke="var(--cert-primary)" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+              <path d="M10 10 C 30 30, 40 15, 55 10 C 70 5, 80 25, 90 20 C 100 15, 105 5, 115 5" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M10 10 C 30 30, 15 40, 10 55 C 5 70, 25 80, 20 90 C 15 100, 5 105, 5 115" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M25 25 C 45 45, 65 30, 75 45 C 80 52, 70 65, 55 55 C 45 48, 48 35, 35 35 Z" fill="var(--cert-secondary)" opacity="0.25" stroke="var(--cert-secondary)" stroke-width="1"/>
+              <circle cx="10" cy="10" r="5" fill="var(--cert-secondary)" stroke="var(--cert-primary)" stroke-width="1"/>
+              <circle cx="28" cy="28" r="3" fill="var(--cert-primary)"/>
+              <path d="M10 10 Q 40 40 50 50" stroke="var(--cert-secondary)" stroke-width="1.2" fill="none"/>
             </svg>
           </div>
           <div class="corner-svg br">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
-              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
-              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
-              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
-              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 50V4H50" stroke="var(--cert-primary)" stroke-width="3"/>
+              <path d="M10 65V10H65" stroke="var(--cert-secondary)" stroke-width="1.8"/>
+              <path d="M18 80V18H80" stroke="var(--cert-primary)" stroke-width="1" stroke-dasharray="2 2" opacity="0.7"/>
+              <path d="M10 10 C 30 30, 40 15, 55 10 C 70 5, 80 25, 90 20 C 100 15, 105 5, 115 5" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M10 10 C 30 30, 15 40, 10 55 C 5 70, 25 80, 20 90 C 15 100, 5 105, 5 115" stroke="var(--cert-secondary)" stroke-width="1.5" fill="none"/>
+              <path d="M25 25 C 45 45, 65 30, 75 45 C 80 52, 70 65, 55 55 C 45 48, 48 35, 35 35 Z" fill="var(--cert-secondary)" opacity="0.25" stroke="var(--cert-secondary)" stroke-width="1"/>
+              <circle cx="10" cy="10" r="5" fill="var(--cert-secondary)" stroke="var(--cert-primary)" stroke-width="1"/>
+              <circle cx="28" cy="28" r="3" fill="var(--cert-primary)"/>
+              <path d="M10 10 Q 40 40 50 50" stroke="var(--cert-secondary)" stroke-width="1.2" fill="none"/>
             </svg>
           </div>
 
           <!-- CERTIFICATE CONTENT BODY -->
           <div class="cert-body">
 
-            <!-- 4 Uploadable Header Logo Placeholders (Invisible when empty) -->
+            <!-- 4 Uploadable Header Logo Placeholders -->
             <div class="header-logos" id="headerLogosContainer">
               <div class="logo-box" id="logoBox1"></div>
               <div class="logo-box" id="logoBox2"></div>
@@ -1111,7 +1491,7 @@
 
             <div class="flex-spacer"></div>
 
-            <!-- Footer Section: 3 Signatures Layout (Without Star Badge) -->
+            <!-- Footer Section: 3 Signatures Layout -->
             <div class="cert-footer">
               <!-- Sig 1: PD Program Coordinator -->
               <div class="sig-col">
@@ -1161,6 +1541,33 @@
   </div>
 
   <script>
+    // Dynamic Awardee Font Switcher
+    function updateAwardeeFont(fontName) {
+      const card = document.getElementById('certificateCard');
+      if (!card) return;
+
+      card.style.setProperty('--recipient-font-family', `'${fontName}'`);
+      
+      if (fontName === 'Great Vibes' || fontName === 'Alex Brush' || fontName === 'Pinyon Script' || fontName === 'Montez') {
+        card.style.setProperty('--recipient-font-style', 'normal');
+        card.style.setProperty('--recipient-font-size', '52px');
+      } else if (fontName === 'Cinzel') {
+        card.style.setProperty('--recipient-font-style', 'normal');
+        card.style.setProperty('--recipient-font-size', '36px');
+      } else {
+        card.style.setProperty('--recipient-font-style', 'italic');
+        card.style.setProperty('--recipient-font-size', '44px');
+      }
+    }
+
+    // Dynamic Certificate Border Style Switcher
+    function setBorderStyle(styleClass) {
+      const card = document.getElementById('certificateCard');
+      if (!card) return;
+      card.classList.remove('border-style-geometric', 'border-style-filigree', 'border-style-regal', 'border-style-modern');
+      card.classList.add(styleClass);
+    }
+
     // PRESET DATA STORE
     const PRESETS = {
       visual: {
@@ -1277,18 +1684,16 @@
       }
     };
 
-    // SAMPLE RANDOM NAMES
     const SAMPLE_NAMES = [
       "Dr. Samira El-Khoury", "Marcus Vance", "Aisha Mohammed", "Christopher Vance", 
       "Laila Al-Sabah", "Prof. Jonathan Sterling", "Hassan Al-Mansoor", "Elena Rostova"
     ];
-    // Handle Watermark Custom Upload & Styling
+
     let uploadedWatermarkData = null;
 
     function handleWatermarkUpload(event) {
       const file = event.target.files[0];
       const wmContainer = document.getElementById('watermarkContainer');
-      
       if (!file) return;
 
       const reader = new FileReader();
@@ -1357,13 +1762,11 @@
       if (uploadedWatermarkData) {
         tileBg.style.backgroundImage = `url("${uploadedWatermarkData}")`;
       } else {
-        // SVG Data URI for Al-Rowad star tile
         const starSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 10 L62 28 L84 28 L84 50 L100 62 L84 74 L84 96 L62 96 L50 114 L38 96 L16 96 L16 74 L0 62 L16 50 L16 28 L38 28 Z" fill="none" stroke="%230b2347" stroke-width="1.5" opacity="0.25"/></svg>`;
         tileBg.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(starSvg)}')`;
       }
     }
 
-    // Reset Logos to Default Placeholders
     function resetLogos() {
       for (let i = 1; i <= 4; i++) {
         const logoBox = document.getElementById(`logoBox${i}`);
@@ -1371,13 +1774,11 @@
           logoBox.innerHTML = '';
           logoBox.style.display = 'none';
         }
-        
         const fileInput = document.getElementById(`uploadLogo${i}`);
         if (fileInput) fileInput.value = '';
       }
     }
 
-    // Handle Header Logo Uploads
     function handleLogoUpload(event, num) {
       const file = event.target.files[0];
       const logoBox = document.getElementById(`logoBox${num}`);
@@ -1391,7 +1792,6 @@
       reader.readAsDataURL(file);
     }
 
-    // DOM Input Map & Live Certificate Synchronization
     const inputs = {
       trainerName: document.getElementById('inTrainerName'),
       trainerRole: document.getElementById('inTrainerRole'),
@@ -1426,26 +1826,17 @@
       if (inputs.sig3Role) document.getElementById('outSig3Role').innerText = inputs.sig3Role.value;
     }
 
-    // Bind event listeners to all input controls
     Object.values(inputs).forEach(input => {
-      if (input) {
-        input.addEventListener('input', updateCertificate);
-      }
+      if (input) input.addEventListener('input', updateCertificate);
     });
 
-    // Set theme palette
     function setTheme(themeName) {
       document.body.setAttribute('data-theme', themeName);
-      
-      // Toggle active status on swatches
-      document.querySelectorAll('.theme-option').forEach(opt => {
-        opt.classList.remove('active');
-      });
+      document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
       const activeOption = document.getElementById(`theme-${themeName}`);
       if (activeOption) activeOption.classList.add('active');
     }
 
-    // Load template preset
     function loadPreset(key) {
       const data = PRESETS[key];
       if (!data) return;
@@ -1467,13 +1858,11 @@
       setTheme(data.theme);
       updateCertificate();
 
-      // Active preset chip styling
       document.querySelectorAll('.btn-chip').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.getElementById(`preset-${key}`);
       if (activeBtn) activeBtn.classList.add('active');
     }
 
-    // Canvas Zoom Controller
     function updateZoom(val) {
       const scaleWrapper = document.getElementById('certScaleWrapper');
       const zoomVal = document.getElementById('zoomVal');
@@ -1481,7 +1870,6 @@
       zoomVal.innerText = `${Math.round(val * 100)}%`;
     }
 
-    // Auto-fit Zoom to Screen
     function fitZoom() {
       const viewportWidth = document.querySelector('.preview-viewport').clientWidth - 60;
       const cardWidth = 1050;
@@ -1492,7 +1880,6 @@
       updateZoom(targetZoom);
     }
 
-    // Randomize sample data
     function randomizeData() {
       const randomName = SAMPLE_NAMES[Math.floor(Math.random() * SAMPLE_NAMES.length)];
       inputs.trainerName.value = randomName;
@@ -1500,15 +1887,16 @@
       updateCertificate();
     }
 
-    // Reset Defaults
     function resetDefaults() {
       loadPreset('visual');
+      setBorderStyle('border-style-geometric');
       resetLogos();
       fitZoom();
     }
 
-    // Initialize on page load
     window.onload = function() {
+      setBorderStyle('border-style-geometric');
+      updateAwardeeFont(document.getElementById('inAwardeeFont').value || 'Cormorant Garamond');
       updateCertificate();
       fitZoom();
       window.addEventListener('resize', fitZoom);

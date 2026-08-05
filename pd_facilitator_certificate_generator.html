@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Teacher PD Facilitator Certificate Generator — AIS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Montez&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    /* Base Color Tokens */
+    --navy-primary: #0b2347;
+    --navy-dark: #061530;
+    --gold-primary: #c59b27;
+    --gold-light: #e8d075;
+    --gold-gradient: linear-gradient(135deg, #b8860b 0%, #e6ca65 50%, #996515 100%);
+    --bg-app: #0f172a;
+    --panel-bg: #1e293b;
+    --panel-border: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    
+    /* Active Certificate Theme Colors (Defaults to Royal Navy) */
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #faf7f0;
+    --cert-primary: #0b2347;
+    --cert-secondary: #c59b27;
+    --cert-accent: #64748b;
+    --cert-border-color: #0b2347;
+    --cert-text-dark: #1e293b;
+    --cert-paper-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  }
+
+  /* Theme Presets */
+  body[data-theme="navy"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #f8f6f0;
+    --cert-primary: #0b2347;
+    --cert-secondary: #b8860b;
+    --cert-accent: #475569;
+    --cert-border-color: #0b2347;
+    --cert-text-dark: #1e293b;
+  }
+  body[data-theme="emerald"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #f2f8f5;
+    --cert-primary: #064e3b;
+    --cert-secondary: #d97706;
+    --cert-accent: #334155;
+    --cert-border-color: #064e3b;
+    --cert-text-dark: #0f172a;
+  }
+  body[data-theme="burgundy"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #faf2f2;
+    --cert-primary: #581c87;
+    --cert-secondary: #b45309;
+    --cert-accent: #475569;
+    --cert-border-color: #581c87;
+    --cert-text-dark: #1e1b4b;
+  }
+  body[data-theme="slate"] {
+    --cert-bg-start: #ffffff;
+    --cert-bg-end: #f1f5f9;
+    --cert-primary: #0f172a;
+    --cert-secondary: #475569;
+    --cert-accent: #64748b;
+    --cert-border-color: #334155;
+    --cert-text-dark: #0f172a;
+  }
+  body[data-theme="midnight"] {
+    --cert-bg-start: #0f172a;
+    --cert-bg-end: #020617;
+    --cert-primary: #f8fafc;
+    --cert-secondary: #eab308;
+    --cert-accent: #94a3b8;
+    --cert-border-color: #eab308;
+    --cert-text-dark: #f8fafc;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-app);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+
+  /* ---------- App Header ---------- */
+  .app-header {
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--panel-border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .app-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .app-title-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gold-gradient);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 4px 12px rgba(197, 155, 39, 0.25);
+  }
+  .app-title h1 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+  .app-title p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 1px 0 0 0;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .btn-primary {
+    background: var(--gold-gradient);
+    color: #000000;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(197, 155, 39, 0.3);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: #334155;
+    color: #ffffff;
+    border: 1px solid #475569;
+  }
+  .btn-secondary:hover {
+    background: #475569;
+    color: #fff;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--panel-border);
+  }
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+  }
+
+  /* ---------- Main Layout Grid ---------- */
+  .workspace {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    flex: 1;
+    height: calc(100vh - 65px);
+    overflow: hidden;
+  }
+
+  /* Control Panel Sidebar */
+  .control-panel {
+    background: var(--panel-bg);
+    border-right: 1px solid var(--panel-border);
+    overflow-y: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .panel-section {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .panel-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-blue);
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+  .form-group:last-child { margin-bottom: 0; }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+  .form-control {
+    width: 100%;
+    background: #0f172a;
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .form-control:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+  }
+
+  /* Theme & Preset Pickers */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+  .theme-option {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    background: #0f172a;
+    transition: all 0.15s ease;
+  }
+  .theme-option:hover, .theme-option.active {
+    border-color: var(--gold-primary);
+    background: #1e293b;
+  }
+  .theme-color-swatch {
+    height: 16px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+  }
+
+  .preset-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .btn-chip {
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #0f172a;
+    border: 1px solid var(--panel-border);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-chip:hover, .btn-chip.active {
+    color: #fff;
+    background: #334155;
+    border-color: var(--accent-blue);
+  }
+
+  /* ---------- Preview Canvas Workspace ---------- */
+  .preview-viewport {
+    background: #090d16;
+    overflow: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
+  
+  .preview-toolbar {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 30px;
+    padding: 6px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    z-index: 10;
+  }
+  .preview-toolbar label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .preview-toolbar input[type="range"] {
+    accent-color: var(--gold-primary);
+    cursor: pointer;
+    width: 120px;
+  }
+
+  /* Certificate Container & Scaling Wrapper */
+  .cert-scale-wrapper {
+    transform-origin: top center;
+    transition: transform 0.1s ease-out;
+  }
+
+  .certificate-card {
+    position: relative;
+    background: linear-gradient(180deg, var(--cert-bg-start) 0%, var(--cert-bg-end) 100%);
+    width: 1050px;
+    height: 742px; /* A4 Landscape Standard Proportion */
+    padding: 0;
+    box-shadow: var(--cert-paper-shadow);
+    color: var(--cert-text-dark);
+    overflow: hidden;
+    user-select: none;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* Background Watermark Pattern */
+  .guilloche-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(circle at 50% 50%, var(--cert-primary) 1px, transparent 1.5px),
+      linear-gradient(to right, rgba(197, 155, 39, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(197, 155, 39, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px, 48px 48px, 48px 48px;
+  }
+
+  /* Academic Central Watermark */
+  .academic-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(var(--wm-scale, 1));
+    width: 440px;
+    height: 440px;
+    opacity: var(--wm-opacity, 0.06);
+    pointer-events: none;
+    color: var(--cert-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  .academic-watermark img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(20%) opacity(0.9);
+  }
+
+  /* Repeating Watermark Grid Pattern */
+  .tiled-watermark-bg {
+    position: absolute;
+    inset: 0;
+    opacity: var(--wm-tile-opacity, 0.03);
+    pointer-events: none;
+    background-size: 140px 140px;
+    background-repeat: repeat;
+    display: none;
+  }
+
+  /* Decorative Borders */
+  .frame-outer {
+    position: absolute;
+    inset: 16px;
+    border: 2px solid var(--cert-border-color);
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+  }
+  .frame-mid {
+    position: absolute;
+    inset: 22px;
+    border: 1px solid var(--cert-secondary);
+    opacity: 0.8;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+  }
+  .frame-inner {
+    position: absolute;
+    inset: 30px;
+    border: 2px double var(--cert-secondary);
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+  }
+
+  /* Corner Flourishes */
+  .corner-svg {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    pointer-events: none;
+  }
+  .corner-svg.tl { top: 12px; left: 12px; }
+  .corner-svg.tr { top: 12px; right: 12px; transform: scaleX(-1); }
+  .corner-svg.bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+  .corner-svg.br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+
+  /* Inner Certificate Layout */
+  .cert-body {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 60px 30px 60px;
+    text-align: center;
+  }
+
+  /* 4 Logos Header Styling */
+  .header-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    min-height: 60px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .logo-box {
+    max-width: 180px;
+    height: 60px;
+    display: none; /* Hidden by default if no image uploaded */
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+  }
+  .logo-box img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .institution-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.26em;
+    color: var(--cert-primary);
+    text-transform: uppercase;
+    margin-top: 4px;
+    line-height: 1.3;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: color 0.3s ease;
+  }
+
+  .facilitator-badge-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(197, 155, 39, 0.12);
+    border: 1px solid var(--cert-secondary);
+    border-radius: 20px;
+    padding: 4px 18px;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--cert-primary);
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .cert-main-title {
+    font-family: 'Cinzel', serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--cert-primary);
+    margin: 8px 0 2px 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .cert-main-title span {
+    color: var(--cert-secondary);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .title-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 10px 0;
+    width: 240px;
+  }
+  .title-divider .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cert-secondary), transparent);
+  }
+  .title-divider .gem {
+    width: 6px;
+    height: 6px;
+    background: var(--cert-secondary);
+    transform: rotate(45deg);
+  }
+
+  .presentation-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cert-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .recipient-container {
+    margin: 2px 0 8px 0;
+    position: relative;
+    display: inline-block;
+    min-width: 65%;
+  }
+  .recipient-name-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--cert-primary);
+    line-height: 1.1;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+  .recipient-underline {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cert-secondary), transparent);
+    width: 100%;
+  }
+
+  .citation-body {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--cert-text-dark);
+    opacity: 0.9;
+    max-width: 780px;
+    margin: 0 auto;
+    font-weight: 500;
+  }
+
+  .workshop-topic-box {
+    margin: 8px 0 4px 0;
+  }
+  .workshop-topic-text {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cert-primary);
+    letter-spacing: 0.02em;
+    transition: color 0.3s ease;
+  }
+
+  .program-tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cert-secondary);
+    margin-top: 2px;
+  }
+
+  .flex-spacer { flex: 1; }
+
+  /* Footer Section: 3 Signatures Layout */
+  .cert-footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: flex-end;
+    margin-top: 15px;
+    padding-top: 5px;
+  }
+
+  .sig-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sig-wrapper {
+    width: 100%;
+    max-width: 230px;
+    text-align: center;
+  }
+  .sig-manual-space {
+    height: 44px; /* Space reserved for physical signature */
+    width: 100%;
+  }
+  .sig-line-drawn {
+    width: 100%;
+    height: 1px;
+    background: var(--cert-primary);
+    opacity: 0.6;
+    margin: 2px 0 5px 0;
+  }
+  .sig-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cert-primary);
+  }
+  .sig-subtitle {
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cert-accent);
+    margin-top: 1px;
+  }
+
+  /* File Input Styles */
+  .logo-upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .logo-upload-item {
+    background: #0f172a;
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 6px;
+    text-align: center;
+  }
+  .logo-upload-item label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .file-input-btn {
+    font-size: 10px;
+    width: 100%;
+    color: var(--text-muted);
+    background: #1e293b;
+    border: 1px dashed var(--panel-border);
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* Metadata Footer */
+  .meta-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 9.5px;
+    color: var(--cert-accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 6px;
+  }
+  .meta-bar .code {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  /* ---------- PRINT MEDIA OVERRIDES ---------- */
+  @media print {
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+    html, body {
+      background: #ffffff !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 100% !important;
+      overflow: visible !important;
+    }
+    .app-header, .control-panel, .preview-toolbar {
+      display: none !important;
+    }
+    .workspace {
+      display: block !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+    .preview-viewport {
+      background: none !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+    .cert-scale-wrapper {
+      transform: none !important;
+    }
+    .certificate-card {
+      box-shadow: none !important;
+      width: 297mm !important;
+      height: 210mm !important;
+      page-break-after: avoid;
+      page-break-inside: avoid;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .workspace {
+      grid-template-columns: 1fr;
+      height: auto;
+      overflow: visible;
+    }
+    .control-panel {
+      height: auto;
+    }
+  }
+</style>
+</head>
+<body data-theme="navy">
+
+  <!-- APP HEADER TOOLBAR -->
+  <header class="app-header">
+    <div class="app-title">
+      <div class="app-title-icon">🎓</div>
+      <div>
+        <h1>PD Facilitator Certificate Generator</h1>
+        <p>Recognizing Educators Who Empower Fellow Teachers</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" id="btnSampleData" onclick="randomizeData()">🎲 Sample Data</button>
+      <button class="btn btn-secondary" id="btnReset" onclick="resetDefaults()">🔄 Reset</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save PDF</button>
+    </div>
+  </header>
+
+  <!-- MAIN WORKSPACE -->
+  <div class="workspace">
+
+    <!-- SIDEBAR CONTROL PANEL -->
+    <aside class="control-panel">
+
+      <!-- Preset Selection -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>⚡ Quick Presets</span>
+        </div>
+        <div class="preset-buttons">
+          <button class="btn-chip active" id="preset-visual" onclick="loadPreset('visual')">Visual Pedagogy</button>
+          <button class="btn-chip" id="preset-ai" onclick="loadPreset('ai')">AI in Education</button>
+          <button class="btn-chip" id="preset-diff" onclick="loadPreset('diff')">Differentiated Tech</button>
+          <button class="btn-chip" id="preset-assessment" onclick="loadPreset('assessment')">Formative Assessment</button>
+          <button class="btn-chip" id="preset-stem" onclick="loadPreset('stem')">Inclusive STEM</button>
+          <button class="btn-chip" id="preset-religion" onclick="loadPreset('religion')">Religion</button>
+          <button class="btn-chip" id="preset-language" onclick="loadPreset('language')">Language Teaching</button>
+        </div>
+      </div>
+
+      <!-- Theme & Style Options -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>🎨 Color Palette</span>
+        </div>
+        <div class="theme-grid">
+          <div class="theme-option active" onclick="setTheme('navy')" id="theme-navy" title="Royal Navy & Gold">
+            <div class="theme-color-swatch" style="background:#0b2347"></div>
+            <span style="font-size:10px; color:#cbd5e1">Navy</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('emerald')" id="theme-emerald" title="Emerald & Amber">
+            <div class="theme-color-swatch" style="background:#064e3b"></div>
+            <span style="font-size:10px; color:#cbd5e1">Emerald</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('burgundy')" id="theme-burgundy" title="Burgundy & Gold">
+            <div class="theme-color-swatch" style="background:#581c87"></div>
+            <span style="font-size:10px; color:#cbd5e1">Burgundy</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('slate')" id="theme-slate" title="Slate & Platinum">
+            <div class="theme-color-swatch" style="background:#1e293b"></div>
+            <span style="font-size:10px; color:#cbd5e1">Slate</span>
+          </div>
+          <div class="theme-option" onclick="setTheme('midnight')" id="theme-midnight" title="Midnight Onyx">
+            <div class="theme-color-swatch" style="background:#020617; border: 1px solid #eab308"></div>
+            <span style="font-size:10px; color:#cbd5e1">Dark</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo Uploads Section -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>🖼️ Header Logos (4 Slots)</span>
+          <button class="btn-chip" onclick="resetLogos()" style="font-size:9px; padding:2px 6px;">Clear Logos</button>
+        </div>
+        <div class="logo-upload-grid">
+          <div class="logo-upload-item">
+            <label>Logo 1 (Left)</label>
+            <input type="file" id="uploadLogo1" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 1)">
+          </div>
+          <div class="logo-upload-item">
+            <label>Logo 2</label>
+            <input type="file" id="uploadLogo2" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 2)">
+          </div>
+          <div class="logo-upload-item">
+            <label>Logo 3</label>
+            <input type="file" id="uploadLogo3" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 3)">
+          </div>
+          <div class="logo-upload-item">
+            <label>Logo 4 (Right)</label>
+            <input type="file" id="uploadLogo4" accept="image/*" class="file-input-btn" onchange="handleLogoUpload(event, 4)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Watermark Controls Section -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>🛡️ Background Watermark Settings</span>
+          <button class="btn-chip" onclick="resetWatermark()" style="font-size:9px; padding:2px 6px;">Reset Logo</button>
+        </div>
+        <div class="form-group">
+          <label>Upload Custom Watermark Image</label>
+          <input type="file" id="uploadWatermarkImg" accept="image/*" class="file-input-btn" onchange="handleWatermarkUpload(event)">
+        </div>
+        <div class="form-group">
+          <label for="wmOpacity">Watermark Opacity (<span id="wmOpacityVal">6%</span>)</label>
+          <input type="range" id="wmOpacity" min="0.01" max="0.30" step="0.01" value="0.06" class="w-full" oninput="updateWatermarkStyle()">
+        </div>
+        <div class="form-group">
+          <label for="wmScale">Watermark Size (<span id="wmScaleVal">100%</span>)</label>
+          <input type="range" id="wmScale" min="0.5" max="1.6" step="0.05" value="1.0" class="w-full" oninput="updateWatermarkStyle()">
+        </div>
+        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+          <label for="toggleTileWm" style="margin-bottom:0; cursor:pointer;">Enable Repeating Tile Pattern</label>
+          <input type="checkbox" id="toggleTileWm" onchange="toggleTilePattern(this.checked)" style="accent-color: var(--gold-primary); cursor:pointer;">
+        </div>
+      </div>
+
+      <!-- Facilitator Details -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>👤 Recipient / Facilitator Info</span>
+        </div>
+        <div class="form-group">
+          <label for="inTrainerName">Recipient Name</label>
+          <input type="text" id="inTrainerName" class="form-control" value="Mohamed Ali Qureshi">
+        </div>
+        <div class="form-group">
+          <label for="inTrainerRole">Badge Subtitle</label>
+          <input type="text" id="inTrainerRole" class="form-control" value="Master Educator & Facilitator">
+        </div>
+      </div>
+
+      <!-- PD Session Details -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>📚 PD Session Details</span>
+        </div>
+        <div class="form-group">
+          <label for="inTopic">Workshop / Topic Title</label>
+          <input type="text" id="inTopic" class="form-control" value="Designing High-Impact Visual Resources for Effective Learning">
+        </div>
+        <div class="form-group">
+          <label for="inProgram">Program / Initiative Line</label>
+          <input type="text" id="inProgram" class="form-control" value="Teacher-Led Professional Development Initiative · 2026 Series">
+        </div>
+        <div class="form-group">
+          <label for="inCitation">Recognition Citation Text</label>
+          <textarea id="inCitation" class="form-control" rows="3" style="resize:vertical">for exceptional leadership, pedagogical innovation, and dedicated facilitation in conducting the peer-to-peer professional development session for school faculty:</textarea>
+        </div>
+        <div class="form-group">
+          <label for="inDate">Date of Issue</label>
+          <input type="text" id="inDate" class="form-control" value="August 15, 2026">
+        </div>
+        <div class="form-group">
+          <label for="inCertCode">Certificate Ref / Verification Code</label>
+          <input type="text" id="inCertCode" class="form-control" value="AIS-PD-2026-8842">
+        </div>
+      </div>
+
+      <!-- Institution & 3 Signatories -->
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>🏛️ Institution & 3 Signatories</span>
+        </div>
+        <div class="form-group">
+          <label for="inInstName">Institution Header</label>
+          <input type="text" id="inInstName" class="form-control" value="AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER">
+        </div>
+        
+        <!-- Sig 1 -->
+        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 8px;">
+          <label for="inSig1Name">1. PD Program Coordinator</label>
+          <input type="text" id="inSig1Name" class="form-control" value="Amanullah Khan">
+          <input type="text" id="inSig1Role" class="form-control" value="PD Program Coordinator" style="margin-top:4px">
+        </div>
+
+        <!-- Sig 2 -->
+        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 8px;">
+          <label for="inSig2Name">2. Director of Education</label>
+          <input type="text" id="inSig2Name" class="form-control" value="Dr. Robert Chen">
+          <input type="text" id="inSig2Role" class="form-control" value="Director of Education" style="margin-top:4px">
+        </div>
+
+        <!-- Sig 3 -->
+        <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 8px;">
+          <label for="inSig3Name">3. CEO</label>
+          <input type="text" id="inSig3Name" class="form-control" value="Yusuf Ashworth">
+          <input type="text" id="inSig3Role" class="form-control" value="Chief Executive Officer" style="margin-top:4px">
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- PREVIEW CANVAS VIEWPORT -->
+    <main class="preview-viewport">
+
+      <div class="preview-toolbar">
+        <label for="zoomRange">Zoom:</label>
+        <input type="range" id="zoomRange" min="0.45" max="1.1" step="0.05" value="0.85" oninput="updateZoom(this.value)">
+        <span id="zoomVal" style="font-size:12px; font-weight:600; color:#fff; min-width:35px">85%</span>
+        <button class="btn-chip" onclick="fitZoom()" style="margin-left:8px">Fit Screen</button>
+      </div>
+
+      <div class="cert-scale-wrapper" id="certScaleWrapper">
+        <div class="certificate-card" id="certificateCard">
+          
+          <div class="guilloche-bg"></div>
+          <div class="tiled-watermark-bg" id="tiledWatermarkBg"></div>
+
+          <!-- Al-Rowad Star & Globe Central Watermark Logo -->
+          <div class="academic-watermark" id="watermarkContainer">
+            <svg id="defaultWmSvg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <!-- Outer 8-Pointed Star (Rub el Hizb) Outer Shell -->
+              <path d="M100 0 L129.29 29.29 L170.71 29.29 L170.71 70.71 L200 100 L170.71 129.29 L170.71 170.71 L129.29 170.71 L100 200 L70.71 170.71 L29.29 170.71 L29.29 129.29 L0 100 L29.29 70.71 L29.29 29.29 L70.71 29.29 Z" fill="currentColor" opacity="0.15"/>
+              <path d="M100 6 L127.5 33.5 L166.5 33.5 L166.5 72.5 L194 100 L166.5 127.5 L166.5 166.5 L127.5 166.5 L100 194 L72.5 166.5 L33.5 166.5 L33.5 127.5 L6 100 L33.5 72.5 L33.5 33.5 L72.5 33.5 Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+              <path d="M100 14 L124.2 38.2 L158.8 38.2 L158.8 72.8 L183.2 100 L158.8 127.2 L158.8 161.8 L124.2 161.8 L100 186 L75.8 161.8 L41.2 161.8 L41.2 127.2 L16.8 100 L41.2 72.8 L41.2 38.2 L75.8 38.2 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              
+              <!-- Globe Ring & Spherical Grid -->
+              <circle cx="100" cy="100" r="48" stroke="currentColor" stroke-width="2" fill="none"/>
+              <circle cx="100" cy="100" r="48" fill="currentColor" opacity="0.08"/>
+              <ellipse cx="100" cy="100" rx="48" ry="20" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+              <ellipse cx="100" cy="100" rx="20" ry="48" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+              
+              <!-- Simplified Continents Outlines -->
+              <path d="M72 82 Q85 75 92 88 Q88 100 76 105 Q68 95 72 82 Z" fill="currentColor" opacity="0.4"/>
+              <path d="M105 75 Q125 72 135 85 Q130 110 115 118 Q100 115 102 98 Q112 90 105 75 Z" fill="currentColor" opacity="0.4"/>
+              <path d="M110 122 Q122 125 120 138 Q110 142 105 132 Z" fill="currentColor" opacity="0.4"/>
+              
+              <!-- Curving Banner Text Top & Bottom Arc Guide Lines -->
+              <path id="topArc" d="M 45 100 A 55 55 0 0 1 155 100" fill="none"/>
+              <path id="bottomArc" d="M 155 100 A 55 55 0 0 1 45 100" fill="none"/>
+              
+              <text font-family="'Cinzel', serif" font-weight="700" font-size="8.5" fill="currentColor" letter-spacing="0.5">
+                <textPath href="#topArc" startOffset="50%" text-anchor="middle">مدارس الرواد العالمية</textPath>
+              </text>
+              <text font-family="'Cinzel', serif" font-weight="700" font-size="7.5" fill="currentColor" letter-spacing="0.2">
+                <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">Al-Rowad International Schools</textPath>
+              </text>
+            </svg>
+          </div>
+
+          <!-- Decorative Frames -->
+          <div class="frame-outer"></div>
+          <div class="frame-mid"></div>
+          <div class="frame-inner"></div>
+
+          <!-- SVG Corner Ornaments -->
+          <div class="corner-svg tl">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
+              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
+              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
+              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
+              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+          <div class="corner-svg tr">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
+              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
+              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
+              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
+              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+          <div class="corner-svg bl">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
+              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
+              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
+              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
+              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+          <div class="corner-svg br">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M5 45V5H45" stroke="var(--cert-primary)" stroke-width="2.5"/>
+              <path d="M12 55V12H55" stroke="var(--cert-secondary)" stroke-width="1.5"/>
+              <path d="M19 65V19H65" stroke="var(--cert-secondary)" stroke-width="1" opacity="0.6"/>
+              <circle cx="12" cy="12" r="4" fill="var(--cert-secondary)"/>
+              <path d="M12 12 Q 35 35 45 45" stroke="var(--cert-secondary)" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+
+          <!-- CERTIFICATE CONTENT BODY -->
+          <div class="cert-body">
+
+            <!-- 4 Uploadable Header Logo Placeholders (Invisible when empty) -->
+            <div class="header-logos" id="headerLogosContainer">
+              <div class="logo-box" id="logoBox1"></div>
+              <div class="logo-box" id="logoBox2"></div>
+              <div class="logo-box" id="logoBox3"></div>
+              <div class="logo-box" id="logoBox4"></div>
+            </div>
+
+            <div class="institution-name" id="outInstName">AL-ROWAD INTERNATIONAL SCHOOLS · ACADEMIC DEVELOPMENT CENTER</div>
+
+            <div class="facilitator-badge-strip" id="outTrainerRole">
+              ⭐ MASTER EDUCATOR & FACILITATOR ⭐
+            </div>
+
+            <div class="cert-main-title">
+              Certificate <span>of</span> Appreciation
+            </div>
+
+            <div class="title-divider">
+              <div class="line"></div>
+              <div class="gem"></div>
+              <div class="line"></div>
+            </div>
+
+            <div class="presentation-text">PROUDLY PRESENTED TO</div>
+
+            <div class="recipient-container">
+              <div class="recipient-name-text" id="outTrainerName">Mohamed Ali Qureshi</div>
+              <div class="recipient-underline"></div>
+            </div>
+
+            <div class="citation-body" id="outCitation">
+              for exceptional leadership, pedagogical innovation, and dedicated facilitation in conducting the peer-to-peer professional development session for school faculty:
+            </div>
+
+            <div class="workshop-topic-box">
+              <div class="workshop-topic-text" id="outTopic">"Designing High-Impact Visual Resources for Effective Learning"</div>
+            </div>
+
+            <div class="program-tag" id="outProgram">TEACHER-LED PROFESSIONAL DEVELOPMENT INITIATIVE · 2026 SERIES</div>
+
+            <div class="flex-spacer"></div>
+
+            <!-- Footer Section: 3 Signatures Layout (Without Star Badge) -->
+            <div class="cert-footer">
+              <!-- Sig 1: PD Program Coordinator -->
+              <div class="sig-col">
+                <div class="sig-wrapper">
+                  <div class="sig-manual-space"></div>
+                  <div class="sig-line-drawn"></div>
+                  <div class="sig-title" id="outSig1Name">Amanullah Khan</div>
+                  <div class="sig-subtitle" id="outSig1Role">PD Program Coordinator</div>
+                </div>
+              </div>
+
+              <!-- Sig 2: Director of Education -->
+              <div class="sig-col">
+                <div class="sig-wrapper">
+                  <div class="sig-manual-space"></div>
+                  <div class="sig-line-drawn"></div>
+                  <div class="sig-title" id="outSig2Name">Dr. Robert Chen</div>
+                  <div class="sig-subtitle" id="outSig2Role">Director of Education</div>
+                </div>
+              </div>
+
+              <!-- Sig 3: CEO -->
+              <div class="sig-col">
+                <div class="sig-wrapper">
+                  <div class="sig-manual-space"></div>
+                  <div class="sig-line-drawn"></div>
+                  <div class="sig-title" id="outSig3Name">Yusuf Ashworth</div>
+                  <div class="sig-subtitle" id="outSig3Role">Chief Executive Officer</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Metadata Footer Bar -->
+            <div class="meta-bar">
+              <div>ISSUED ON: <span id="outDate">AUGUST 15, 2026</span></div>
+              <div>VERIFICATION CODE: <span class="code" id="outCertCode">AIS-PD-2026-8842</span></div>
+              <div>AUTHENTICITY GUARANTEED</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    // PRESET DATA STORE
+    const PRESETS = {
+      visual: {
+        trainerName: "Mohamed Ali Qureshi",
+        trainerRole: "Master Educator & Visual Pedagogy Specialist",
+        topic: "Designing High-Impact Visual Resources for Effective Learning",
+        program: "Teacher-Led Professional Development Initiative · 2026 Series",
+        citation: "for exceptional leadership, pedagogical innovation, and dedicated facilitation in conducting the peer-to-peer professional development session for school faculty:",
+        date: "August 15, 2026",
+        code: "AIS-PD-2026-8842",
+        sig1Name: "Amanullah Khan",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Robert Chen",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "navy"
+      },
+      ai: {
+        trainerName: "Dr. Fatima Al-Zahra",
+        trainerRole: "EdTech Lead & AI Integration Mentor",
+        topic: "Generative AI in the Classroom: Enhancing Lesson Design & Assessment",
+        program: "Future Readiness & Digital Pedagogy Cohort · 2026",
+        citation: "for outstanding expertise, forward-thinking guidance, and inspiring facilitation during the hands-on faculty workshop series on:",
+        date: "September 02, 2026",
+        code: "AIS-AI-2026-9011",
+        sig1Name: "Sarah Jenkins",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Robert Chen",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "emerald"
+      },
+      diff: {
+        trainerName: "David Vance, M.Ed.",
+        trainerRole: "Inclusive Education Specialist",
+        topic: "Differentiated Instruction Strategies for Neurodiverse Learners",
+        program: "Continuous Professional Growth Program · Autumn 2026",
+        citation: "in recognition of invaluable contributions and exemplary workshop leadership empowering educators to implement:",
+        date: "October 10, 2026",
+        code: "AIS-DI-2026-4410",
+        sig1Name: "Mariam Al-Hassan",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Elizabeth Vance",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "burgundy"
+      },
+      assessment: {
+        trainerName: "Elena Rostova",
+        trainerRole: "Assessment & Curricular Analyst",
+        topic: "Formative Assessment & Real-Time Feedback Techniques",
+        program: "Excellence in Teaching & Learning Seminar Series",
+        citation: "for masterclass facilitation and empowering peer educators with actionable techniques during the professional session on:",
+        date: "November 18, 2026",
+        code: "AIS-FA-2026-1205",
+        sig1Name: "Amanullah Khan",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Robert Chen",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "slate"
+      },
+      stem: {
+        trainerName: "Tariq Mansoor",
+        trainerRole: "STEM Coordinator & Robotics Coach",
+        topic: "Hands-On Inquiry & Problem-Based Learning in Middle School STEM",
+        program: "STEM Education & Hands-On Science Initiative 2026",
+        citation: "for exemplary leadership, creative workshop design, and dedication to fostering active learning through:",
+        date: "December 05, 2026",
+        code: "AIS-STEM-2026-7731",
+        sig1Name: "Kareem Abdul-Nasser",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Robert Chen",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "midnight"
+      },
+      religion: {
+        trainerName: "Sheikh Abdulrahman Al-Mansoori",
+        trainerRole: "Islamic Studies & Values Education Mentor",
+        topic: "Integrating Ethics & Value-Based Pedagogy Across the Curriculum",
+        program: "Values Education & Character Building Initiative · 2026",
+        citation: "for outstanding devotion, scholarly leadership, and exemplary facilitation in conducting the faculty enrichment workshop on:",
+        date: "September 15, 2026",
+        code: "AIS-REL-2026-3301",
+        sig1Name: "Amanullah Khan",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Robert Chen",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "emerald"
+      },
+      language: {
+        trainerName: "Dr. Sarah Al-Hassan",
+        trainerRole: "Applied Linguistics & Language Pedagogy Specialist",
+        topic: "Communicative Language Teaching & Immersion Strategies",
+        program: "Language Pedagogy & Multilingual Education Program · 2026",
+        citation: "for exceptional leadership, linguistic expertise, and inspiring workshop facilitation in the peer training session on:",
+        date: "October 05, 2026",
+        code: "AIS-LANG-2026-5520",
+        sig1Name: "Mariam Al-Hassan",
+        sig1Role: "PD Program Coordinator",
+        sig2Name: "Dr. Robert Chen",
+        sig2Role: "Director of Education",
+        sig3Name: "Yusuf Ashworth",
+        sig3Role: "Chief Executive Officer",
+        theme: "burgundy"
+      }
+    };
+
+    // SAMPLE RANDOM NAMES
+    const SAMPLE_NAMES = [
+      "Dr. Samira El-Khoury", "Marcus Vance", "Aisha Mohammed", "Christopher Vance", 
+      "Laila Al-Sabah", "Prof. Jonathan Sterling", "Hassan Al-Mansoor", "Elena Rostova"
+    ];
+    // Handle Watermark Custom Upload & Styling
+    let uploadedWatermarkData = null;
+
+    function handleWatermarkUpload(event) {
+      const file = event.target.files[0];
+      const wmContainer = document.getElementById('watermarkContainer');
+      
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedWatermarkData = e.target.result;
+        wmContainer.innerHTML = `<img src="${uploadedWatermarkData}" alt="Watermark Logo">`;
+        updateTiledPattern();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetWatermark() {
+      const wmContainer = document.getElementById('watermarkContainer');
+      const fileInput = document.getElementById('uploadWatermarkImg');
+      if (fileInput) fileInput.value = '';
+      uploadedWatermarkData = null;
+
+      wmContainer.innerHTML = `
+        <svg id="defaultWmSvg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M100 0 L129.29 29.29 L170.71 29.29 L170.71 70.71 L200 100 L170.71 129.29 L170.71 170.71 L129.29 170.71 L100 200 L70.71 170.71 L29.29 170.71 L29.29 129.29 L0 100 L29.29 70.71 L29.29 29.29 L70.71 29.29 Z" fill="currentColor" opacity="0.15"/>
+          <path d="M100 6 L127.5 33.5 L166.5 33.5 L166.5 72.5 L194 100 L166.5 127.5 L166.5 166.5 L127.5 166.5 L100 194 L72.5 166.5 L33.5 166.5 L33.5 127.5 L6 100 L33.5 72.5 L33.5 33.5 L72.5 33.5 Z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+          <path d="M100 14 L124.2 38.2 L158.8 38.2 L158.8 72.8 L183.2 100 L158.8 127.2 L158.8 161.8 L124.2 161.8 L100 186 L75.8 161.8 L41.2 161.8 L41.2 127.2 L16.8 100 L41.2 72.8 L41.2 38.2 L75.8 38.2 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="100" cy="100" r="48" stroke="currentColor" stroke-width="2" fill="none"/>
+          <circle cx="100" cy="100" r="48" fill="currentColor" opacity="0.08"/>
+          <ellipse cx="100" cy="100" rx="48" ry="20" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+          <ellipse cx="100" cy="100" rx="20" ry="48" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+          <path d="M72 82 Q85 75 92 88 Q88 100 76 105 Q68 95 72 82 Z" fill="currentColor" opacity="0.4"/>
+          <path d="M105 75 Q125 72 135 85 Q130 110 115 118 Q100 115 102 98 Q112 90 105 75 Z" fill="currentColor" opacity="0.4"/>
+          <path d="M110 122 Q122 125 120 138 Q110 142 105 132 Z" fill="currentColor" opacity="0.4"/>
+          <path id="topArc" d="M 45 100 A 55 55 0 0 1 155 100" fill="none"/>
+          <path id="bottomArc" d="M 155 100 A 55 55 0 0 1 45 100" fill="none"/>
+          <text font-family="'Cinzel', serif" font-weight="700" font-size="8.5" fill="currentColor" letter-spacing="0.5">
+            <textPath href="#topArc" startOffset="50%" text-anchor="middle">مدارس الرواد العالمية</textPath>
+          </text>
+          <text font-family="'Cinzel', serif" font-weight="700" font-size="7.5" fill="currentColor" letter-spacing="0.2">
+            <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">Al-Rowad International Schools</textPath>
+          </text>
+        </svg>
+      `;
+      updateTiledPattern();
+    }
+
+    function updateWatermarkStyle() {
+      const opacity = document.getElementById('wmOpacity').value;
+      const scale = document.getElementById('wmScale').value;
+      
+      document.getElementById('wmOpacityVal').innerText = `${Math.round(opacity * 100)}%`;
+      document.getElementById('wmScaleVal').innerText = `${Math.round(scale * 100)}%`;
+
+      document.documentElement.style.setProperty('--wm-opacity', opacity);
+      document.documentElement.style.setProperty('--wm-scale', scale);
+    }
+
+    function toggleTilePattern(enabled) {
+      const tileBg = document.getElementById('tiledWatermarkBg');
+      if (enabled) {
+        updateTiledPattern();
+        tileBg.style.display = 'block';
+      } else {
+        tileBg.style.display = 'none';
+      }
+    }
+
+    function updateTiledPattern() {
+      const tileBg = document.getElementById('tiledWatermarkBg');
+      if (uploadedWatermarkData) {
+        tileBg.style.backgroundImage = `url("${uploadedWatermarkData}")`;
+      } else {
+        // SVG Data URI for Al-Rowad star tile
+        const starSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 10 L62 28 L84 28 L84 50 L100 62 L84 74 L84 96 L62 96 L50 114 L38 96 L16 96 L16 74 L0 62 L16 50 L16 28 L38 28 Z" fill="none" stroke="%230b2347" stroke-width="1.5" opacity="0.25"/></svg>`;
+        tileBg.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(starSvg)}')`;
+      }
+    }
+
+    // Reset Logos to Default Placeholders
+    function resetLogos() {
+      for (let i = 1; i <= 4; i++) {
+        const logoBox = document.getElementById(`logoBox${i}`);
+        if (logoBox) {
+          logoBox.innerHTML = '';
+          logoBox.style.display = 'none';
+        }
+        
+        const fileInput = document.getElementById(`uploadLogo${i}`);
+        if (fileInput) fileInput.value = '';
+      }
+    }
+
+    // Handle Header Logo Uploads
+    function handleLogoUpload(event, num) {
+      const file = event.target.files[0];
+      const logoBox = document.getElementById(`logoBox${num}`);
+      if (!file || !logoBox) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        logoBox.innerHTML = `<img src="${e.target.result}" alt="Header Logo ${num}">`;
+        logoBox.style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // DOM Input Map & Live Certificate Synchronization
+    const inputs = {
+      trainerName: document.getElementById('inTrainerName'),
+      trainerRole: document.getElementById('inTrainerRole'),
+      topic: document.getElementById('inTopic'),
+      program: document.getElementById('inProgram'),
+      citation: document.getElementById('inCitation'),
+      date: document.getElementById('inDate'),
+      certCode: document.getElementById('inCertCode'),
+      instName: document.getElementById('inInstName'),
+      sig1Name: document.getElementById('inSig1Name'),
+      sig1Role: document.getElementById('inSig1Role'),
+      sig2Name: document.getElementById('inSig2Name'),
+      sig2Role: document.getElementById('inSig2Role'),
+      sig3Name: document.getElementById('inSig3Name'),
+      sig3Role: document.getElementById('inSig3Role')
+    };
+
+    function updateCertificate() {
+      if (inputs.trainerName) document.getElementById('outTrainerName').innerText = inputs.trainerName.value || 'Recipient Name';
+      if (inputs.trainerRole) document.getElementById('outTrainerRole').innerText = inputs.trainerRole.value ? `⭐ ${inputs.trainerRole.value.toUpperCase()} ⭐` : '';
+      if (inputs.topic) document.getElementById('outTopic').innerText = `"${inputs.topic.value}"`;
+      if (inputs.program) document.getElementById('outProgram').innerText = inputs.program.value.toUpperCase();
+      if (inputs.citation) document.getElementById('outCitation').innerText = inputs.citation.value;
+      if (inputs.date) document.getElementById('outDate').innerText = inputs.date.value.toUpperCase();
+      if (inputs.certCode) document.getElementById('outCertCode').innerText = inputs.certCode.value;
+      if (inputs.instName) document.getElementById('outInstName').innerText = inputs.instName.value;
+      if (inputs.sig1Name) document.getElementById('outSig1Name').innerText = inputs.sig1Name.value;
+      if (inputs.sig1Role) document.getElementById('outSig1Role').innerText = inputs.sig1Role.value;
+      if (inputs.sig2Name) document.getElementById('outSig2Name').innerText = inputs.sig2Name.value;
+      if (inputs.sig2Role) document.getElementById('outSig2Role').innerText = inputs.sig2Role.value;
+      if (inputs.sig3Name) document.getElementById('outSig3Name').innerText = inputs.sig3Name.value;
+      if (inputs.sig3Role) document.getElementById('outSig3Role').innerText = inputs.sig3Role.value;
+    }
+
+    // Bind event listeners to all input controls
+    Object.values(inputs).forEach(input => {
+      if (input) {
+        input.addEventListener('input', updateCertificate);
+      }
+    });
+
+    // Set theme palette
+    function setTheme(themeName) {
+      document.body.setAttribute('data-theme', themeName);
+      
+      // Toggle active status on swatches
+      document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.classList.remove('active');
+      });
+      const activeOption = document.getElementById(`theme-${themeName}`);
+      if (activeOption) activeOption.classList.add('active');
+    }
+
+    // Load template preset
+    function loadPreset(key) {
+      const data = PRESETS[key];
+      if (!data) return;
+
+      inputs.trainerName.value = data.trainerName;
+      inputs.trainerRole.value = data.trainerRole;
+      inputs.topic.value = data.topic;
+      inputs.program.value = data.program;
+      inputs.citation.value = data.citation;
+      inputs.date.value = data.date;
+      inputs.certCode.value = data.code;
+      inputs.sig1Name.value = data.sig1Name;
+      inputs.sig1Role.value = data.sig1Role;
+      inputs.sig2Name.value = data.sig2Name;
+      inputs.sig2Role.value = data.sig2Role;
+      inputs.sig3Name.value = data.sig3Name;
+      inputs.sig3Role.value = data.sig3Role;
+
+      setTheme(data.theme);
+      updateCertificate();
+
+      // Active preset chip styling
+      document.querySelectorAll('.btn-chip').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`preset-${key}`);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    // Canvas Zoom Controller
+    function updateZoom(val) {
+      const scaleWrapper = document.getElementById('certScaleWrapper');
+      const zoomVal = document.getElementById('zoomVal');
+      scaleWrapper.style.transform = `scale(${val})`;
+      zoomVal.innerText = `${Math.round(val * 100)}%`;
+    }
+
+    // Auto-fit Zoom to Screen
+    function fitZoom() {
+      const viewportWidth = document.querySelector('.preview-viewport').clientWidth - 60;
+      const cardWidth = 1050;
+      let targetZoom = viewportWidth / cardWidth;
+      targetZoom = Math.min(Math.max(targetZoom, 0.45), 1.0);
+      
+      document.getElementById('zoomRange').value = targetZoom;
+      updateZoom(targetZoom);
+    }
+
+    // Randomize sample data
+    function randomizeData() {
+      const randomName = SAMPLE_NAMES[Math.floor(Math.random() * SAMPLE_NAMES.length)];
+      inputs.trainerName.value = randomName;
+      inputs.certCode.value = `AIS-PD-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      updateCertificate();
+    }
+
+    // Reset Defaults
+    function resetDefaults() {
+      loadPreset('visual');
+      resetLogos();
+      fitZoom();
+    }
+
+    // Initialize on page load
+    window.onload = function() {
+      updateCertificate();
+      fitZoom();
+      window.addEventListener('resize', fitZoom);
+    };
+  </script>
+</body>
+</html>

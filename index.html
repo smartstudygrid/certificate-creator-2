@@ -83,16 +83,19 @@
 
   * { box-sizing: border-box; }
 
-  body {
+  html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+  }
+
+  body {
     background: var(--bg-app);
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: var(--text-main);
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
   }
 
   /* Custom Scrollbar */
@@ -124,6 +127,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-shrink: 0;
   }
   .app-title {
     display: flex;
@@ -206,7 +210,8 @@
     display: grid;
     grid-template-columns: 380px 1fr;
     flex: 1;
-    height: calc(100vh - 65px);
+    min-height: 0;
+    height: 100%;
     overflow: hidden;
   }
 
@@ -215,6 +220,8 @@
     background: var(--panel-bg);
     border-right: 1px solid var(--panel-border);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    height: 100%;
     padding: 18px;
     display: flex;
     flex-direction: column;
@@ -318,6 +325,8 @@
   .preview-viewport {
     background: #090d16;
     overflow: auto;
+    overscroll-behavior: contain;
+    height: 100%;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -755,6 +764,10 @@
   }
 
   @media (max-width: 960px) {
+    html, body {
+      overflow: auto;
+      height: auto;
+    }
     .workspace {
       grid-template-columns: 1fr;
       height: auto;
